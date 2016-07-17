@@ -18,13 +18,18 @@
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm run test",
+      "pre-commit": "npm run pkg:lint && npm run pkg:test",
       "commit-msg": "validate-commit-msg"
     }
   },
   "dependencies": {
     "react": "15.2.1",
-    "react-dom": "15.2.1"
+    "react-dom": "15.2.1",
+    "react-redux": "4.4.5",
+    "redux": "3.5.2",
+    "redux-tcomb": "0.2.0",
+    "redux-thunk": "^2.1.0",
+    "tcomb": "3.2.7"
   },
   "devDependencies": {
     "code": "3.0.1",
@@ -40,7 +45,7 @@
     "pkg:coverage": "katulong coverage",
     "pkg:lint": "katulong lint",
     "pkg:preview": "katulong preview",
-    "pkg:test": "katulong test",
+    "pkg:test": "katulong test --reporter spec",
     "test": "npm run pkg:test"
   }
 }
