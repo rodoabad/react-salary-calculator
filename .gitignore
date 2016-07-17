@@ -1,0 +1,9 @@
+.DS_STORE
+.bundle
+.eslintcache
+.idea
+npm-debug.log
+coverage
+dist
+node_modules
+*.swp

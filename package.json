@@ -1,0 +1,46 @@
+{
+  "name": "salary-calculator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/salary-calculator.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodoabad/salary-calculator.git"
+  },
+  "author": "Rodo Abad <rodoabad@gmail.com> (https://github.com/rodoabad)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rodoabad/salary-calculator/issues"
+  },
+  "homepage": "https://github.com/rodoabad/salary-calculator#readme",
+  "engines": {
+    "node": ">=6.x"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run test",
+      "commit-msg": "validate-commit-msg"
+    }
+  },
+  "dependencies": {
+    "react": "15.2.1",
+    "react-dom": "15.2.1"
+  },
+  "devDependencies": {
+    "code": "3.0.1",
+    "enzyme": "2.4.1",
+    "ghooks": "1.3.2",
+    "katulong": "2.21.0",
+    "react-addons-test-utils": "15.2.1",
+    "sinon": "1.17.4",
+    "validate-commit-msg": "2.6.1"
+  },
+  "scripts": {
+    "pkg:bundle": "katulong bundle",
+    "pkg:coverage": "katulong coverage",
+    "pkg:lint": "katulong lint",
+    "pkg:preview": "katulong preview",
+    "pkg:test": "katulong test",
+    "test": "npm run pkg:test"
+  }
+}
