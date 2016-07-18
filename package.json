@@ -46,6 +46,6 @@
     "pkg:lint": "katulong lint",
     "pkg:preview": "katulong preview",
     "pkg:test": "katulong test --reporter spec",
-    "test": "npm run pkg:lint && npm run pkg:test"
+    "test": "npm run pkg:lint && npm run pkg:coverage"
   }
 }
