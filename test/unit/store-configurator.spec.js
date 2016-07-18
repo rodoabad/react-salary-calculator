@@ -5,6 +5,7 @@ import sinon from 'sinon';
 import thunk from 'redux-thunk';
 
 describe('Given the store configurator', () => {
+
     let applyMiddlewareStub,
         expectedReducers,
         middlewareStoreCreatorStub,
