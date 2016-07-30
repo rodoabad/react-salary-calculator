@@ -3,12 +3,8 @@ import thunk from 'redux-thunk';
 
 export const create = reducers => {
 
-    const middlewares = [
-        thunk
-    ];
-
     const middlewareStoreCreator = compose(
-        applyMiddleware(...middlewares)
+        applyMiddleware(thunk)
     )(createStore);
 
     return middlewareStoreCreator(reducers);

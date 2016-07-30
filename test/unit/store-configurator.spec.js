@@ -6,12 +6,22 @@ import thunk from 'redux-thunk';
 
 describe('Given the store configurator', () => {
 
-    let applyMiddlewareStub,
+    let createdStore,
         expectedReducers,
         middlewareStoreCreatorStub,
         sandbox,
         storeConstructorStub,
         storeInstanceStub;
+
+    const stubApplyMiddleWare = () => {
+
+        storeInstanceStub = sandbox.stub();
+        middlewareStoreCreatorStub = sandbox.stub().returns(storeInstanceStub);
+        storeConstructorStub = sandbox.stub().returns(middlewareStoreCreatorStub);
+
+        sandbox.stub(redux, 'applyMiddleware').returns(storeConstructorStub);
+
+    };
 
     beforeEach(() => {
 
@@ -19,11 +29,9 @@ describe('Given the store configurator', () => {
 
         sandbox = sinon.sandbox.create();
 
-        storeInstanceStub = sandbox.stub();
-        middlewareStoreCreatorStub = sandbox.stub().returns(storeInstanceStub);
-        storeConstructorStub = sandbox.stub().returns(middlewareStoreCreatorStub);
+        stubApplyMiddleWare();
 
-        applyMiddlewareStub = sandbox.stub(redux, 'applyMiddleware').returns(storeConstructorStub);
+        createdStore = storeConfigurator.create(expectedReducers);
 
     });
 
@@ -33,46 +41,30 @@ describe('Given the store configurator', () => {
 
     });
 
-    describe('when configuring the store', () => {
+    it('should use the thunk middleware to support async actions', () => {
 
-        let storeInstance;
+        sinon.assert.calledOnce(redux.applyMiddleware);
+        sinon.assert.calledWithExactly(redux.applyMiddleware, thunk);
 
-        beforeEach(() => {
+    });
 
-            storeInstance = storeConfigurator.create(expectedReducers);
+    it('should use the store creator with the thunk middleware', () => {
 
-        });
+        sinon.assert.calledOnce(storeConstructorStub);
+        sinon.assert.calledWithExactly(storeConstructorStub, redux.createStore);
 
-        it('should apply all middlewares', () => {
+    });
 
-            const expectedMiddlewaresToApply = [
-                thunk
-            ];
+    it('should pass the reducers to the middleware store creator', () => {
 
-            sinon.assert.calledOnce(applyMiddlewareStub);
-            sinon.assert.calledWithExactly(applyMiddlewareStub, ...expectedMiddlewaresToApply);
+        sinon.assert.calledOnce(middlewareStoreCreatorStub);
+        sinon.assert.calledWithExactly(middlewareStoreCreatorStub, expectedReducers);
 
-        });
+    });
 
-        it('should have a composed function with all the middleware applied', () => {
+    it('should return the store instance', () => {
 
-            sinon.assert.calledOnce(storeConstructorStub);
-            sinon.assert.calledWithExactly(storeConstructorStub, redux.createStore);
-
-        });
-
-        it('should pass the reducers to the store creator', () => {
-
-            sinon.assert.calledOnce(middlewareStoreCreatorStub);
-            sinon.assert.calledWithExactly(middlewareStoreCreatorStub, expectedReducers);
-
-        });
-
-        it('should return the store instance', () => {
-
-            expect(storeInstance).function().equal(storeInstanceStub);
-
-        });
+        expect(createdStore).function().equal(storeInstanceStub);
 
     });
 
