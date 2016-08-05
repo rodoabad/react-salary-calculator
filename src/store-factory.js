@@ -1,10 +1,11 @@
 import * as storeConfigurator from './store-configurator';
+import storeReducer from './store-reducer';
 
 let store;
 
 const createStore = () => {
 
-    const reducer = {};
+    const reducer = storeReducer;
 
     return storeConfigurator.create(reducer);
 
