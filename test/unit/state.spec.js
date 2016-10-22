@@ -61,4 +61,27 @@ describe('Given the TakeHome state', () => {
 
     });
 
+    describe('and when initialized with actual data', () => {
+
+        let takeHome;
+
+        beforeEach(() => {
+
+            takeHome = new TakeHome({
+                salary: 1000,
+                taxYear: 0
+            });
+
+        });
+
+        it('should return the yearly income', () => {
+
+            const expectedYearlyIncome = 83.33;
+
+            expect(takeHome.yearlyIncome()).number().equal(expectedYearlyIncome);
+
+        });
+
+    });
+
 });

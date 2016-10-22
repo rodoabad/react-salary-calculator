@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "babel-runtime": "6.11.6",
+    "bignumber.js": "^2.4.0",
     "moment": "2.14.1",
     "react": "15.3.0",
     "react-dom": "15.3.0",
