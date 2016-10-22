@@ -1,17 +1,23 @@
 import TakeHome, {getDefaultState} from '../../src/state';
+import Chance from 'chance';
 import {expect} from 'code';
+import {fn as moment} from 'moment';
 import sinon from 'sinon';
 import t from 'tcomb';
 
 describe('Given the TakeHome state', () => {
 
-    let sandbox;
+    let chance,
+        mockYear,
+        sandbox;
 
     beforeEach(() => {
 
-        sandbox = sinon.sandbox.create({
-            useFakeTimers: true
-        });
+        chance = new Chance();
+        sandbox = sinon.sandbox.create();
+
+        mockYear = chance.natural();
+        sandbox.stub(moment, 'year').returns(mockYear);
 
     });
 
@@ -49,9 +55,7 @@ describe('Given the TakeHome state', () => {
 
         it('should have `year`', () => {
 
-            const expectedYear = 1969;
-
-            expect(defaultState.year).number().equal(expectedYear);
+            expect(defaultState.year).number().equal(mockYear);
 
         });
 

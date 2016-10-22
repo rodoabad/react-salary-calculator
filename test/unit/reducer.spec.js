@@ -4,13 +4,14 @@ import {expect} from 'code';
 import {getDefaultState} from '../../src/state';
 import takeHomeReducer from '../../src/reducer';
 
-const chance = new Chance();
-
 describe('Given the take home reducer', () => {
 
-    let initialState;
+    let chance,
+        initialState;
 
     beforeEach(() => {
+
+        chance = new Chance();
 
         initialState = getDefaultState();
 
