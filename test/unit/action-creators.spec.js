@@ -1,5 +1,5 @@
-import * as actionCreators from '../../../src/take-home/action-creators';
-import actions from '../../../src/actions';
+import * as actionCreators from '../../src/action-creators';
+import actions from '../../src/actions';
 import {expect} from 'code';
 
 describe('Given the action creators for take home', () => {
