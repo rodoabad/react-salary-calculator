@@ -7,4 +7,6 @@ const TakeHome = () =>
 
 TakeHome.displayName = 'TakeHome';
 
-export default TakeHome;
+export {
+    TakeHome
+};

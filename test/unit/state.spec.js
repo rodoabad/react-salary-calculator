@@ -1,4 +1,4 @@
-import TakeHome, {getDefaultState} from '../../../src/take-home/state';
+import TakeHome, {getDefaultState} from '../../src/state';
 import {expect} from 'code';
 import sinon from 'sinon';
 import t from 'tcomb';

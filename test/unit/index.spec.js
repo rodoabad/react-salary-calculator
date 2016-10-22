@@ -1,7 +1,7 @@
 import {Provider} from 'react-redux';
 import React from 'react';
 import SalaryCalculator from '../../src/';
-import TakeHome from '../../src/take-home';
+import {TakeHome} from '../../src/take-home';
 import {expect} from 'code';
 import {shallow} from 'enzyme';
 import sinon from 'sinon';
@@ -46,13 +46,13 @@ describe('Given the <SalaryCalculator/> component', () => {
 
     });
 
-    describe('and its <TakeHome/>', () => {
+    describe('and its <StateConnector/>', () => {
 
-        it('should be using <TakeHome/>', () => {
+        it('should be using wrapping <TakeHome/>', () => {
 
             const takeHomeEl = salaryCalculatorEl.childAt(0);
 
-            expect(takeHomeEl.type()).function().equal(TakeHome);
+            expect(takeHomeEl.type().WrappedComponent).function().equal(TakeHome);
 
         });
 

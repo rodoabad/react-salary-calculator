@@ -1,13 +1,16 @@
 import * as storeConfigurator from './store-configurator';
-import storeReducer from './store-reducer';
+import {combineReducers} from 'redux';
+import reducer from './reducer';
 
 let store;
 
 const createStore = () => {
 
-    const reducer = storeReducer;
+    const combinedReducers = combineReducers({
+        ...reducer
+    });
 
-    return storeConfigurator.create(reducer);
+    return storeConfigurator.create(combinedReducers);
 
 };
 

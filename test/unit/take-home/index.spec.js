@@ -1,5 +1,5 @@
 import React from 'react';
-import TakeHome from '../../../src/take-home';
+import {TakeHome} from '../../../src/take-home/';
 import {expect} from 'code';
 import {shallow} from 'enzyme';
 
