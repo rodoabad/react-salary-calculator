@@ -55,7 +55,7 @@ describe('Given the TakeHome state', () => {
 
         it('should have `year`', () => {
 
-            expect(defaultState.year).number().equal(mockYear);
+            expect(defaultState.taxYear).number().equal(mockYear);
 
         });
 

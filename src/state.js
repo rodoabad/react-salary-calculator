@@ -3,7 +3,7 @@ import t from 'tcomb';
 
 const TakeHome = t.struct({
     salary: t.Number,
-    year: t.Number
+    taxYear: t.Number
 }, {
     name: 'TakeHome',
     strict: true
@@ -12,7 +12,7 @@ const TakeHome = t.struct({
 export const getDefaultState = () =>
     new TakeHome({
         salary: 0,
-        year: moment().year()
+        taxYear: moment().year()
     });
 
 export default TakeHome;
