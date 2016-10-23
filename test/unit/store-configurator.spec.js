@@ -1,8 +1,9 @@
 import * as redux from 'redux';
+import * as reduxLogger from 'redux-logger';
+import * as reduxThunk from 'redux-thunk';
 import * as storeConfigurator from '../../src/store-configurator';
 import {expect} from 'code';
 import sinon from 'sinon';
-import thunk from 'redux-thunk';
 
 describe('Given the store configurator', () => {
 
@@ -29,6 +30,9 @@ describe('Given the store configurator', () => {
 
         sandbox = sinon.sandbox.create();
 
+        sandbox.stub(reduxThunk, 'default');
+        sandbox.stub(reduxLogger, 'default');
+
         stubApplyMiddleWare();
 
         createdStore = storeConfigurator.create(expectedReducers);
@@ -44,7 +48,7 @@ describe('Given the store configurator', () => {
     it('should use the thunk middleware to support async actions', () => {
 
         sinon.assert.calledOnce(redux.applyMiddleware);
-        sinon.assert.calledWithExactly(redux.applyMiddleware, thunk);
+        sinon.assert.calledWith(redux.applyMiddleware, reduxThunk.default);
 
     });
 
