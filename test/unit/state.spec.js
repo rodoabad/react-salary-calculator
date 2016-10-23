@@ -5,7 +5,7 @@ import {fn as moment} from 'moment';
 import sinon from 'sinon';
 import t from 'tcomb';
 
-describe('Given the TakeHome state', () => {
+describe('Given the salary calculator state', () => {
 
     let chance,
         mockYear,
@@ -25,7 +25,7 @@ describe('Given the TakeHome state', () => {
 
     it('should have a type name', () => {
 
-        expect(t.getTypeName(TakeHome)).string().equal('TakeHome');
+        expect(t.getTypeName(TakeHome)).string().equal('SalaryCalculator');
 
     });
 
@@ -59,26 +59,12 @@ describe('Given the TakeHome state', () => {
 
         });
 
-    });
+        it('should have `yearlyIncome`', () => {
 
-    describe('and when initialized with actual data', () => {
-
-        let takeHome;
-
-        beforeEach(() => {
-
-            takeHome = new TakeHome({
-                salary: 1000,
-                taxYear: 0
-            });
-
-        });
-
-        it('should return the yearly income', () => {
-
+            const mockSalary = 1000;
             const expectedYearlyIncome = 83.33;
 
-            expect(takeHome.yearlyIncome()).number().equal(expectedYearlyIncome);
+            expect(defaultState.yearlyIncome(mockSalary)).number().equal(expectedYearlyIncome);
 
         });
 

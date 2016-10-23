@@ -2,7 +2,7 @@ import * as actionCreators from '../../src/action-creators';
 import actions from '../../src/actions';
 import {expect} from 'code';
 
-describe('Given the action creators for take home', () => {
+describe('Given the action creators for salary calculator', () => {
 
     describe('when updating the salary', () => {
 

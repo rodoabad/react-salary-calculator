@@ -3,6 +3,7 @@ import React from 'react';
 import StateConnector from '../../src/state-connector';
 import {TakeHome} from '../../src/take-home';
 import {expect} from 'code';
+import {getDefaultState} from '../../src/state';
 import {mockReduxStore} from '../utils/mock-redux-store';
 import {shallow} from 'enzyme';
 
@@ -13,7 +14,9 @@ describe('Given the <StateConnector/> component', () => {
 
     beforeEach(() => {
 
-        const store = mockReduxStore({});
+        const store = mockReduxStore({
+            ...getDefaultState()
+        });
 
         testProps = Object.freeze({
             store

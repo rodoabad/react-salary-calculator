@@ -4,7 +4,7 @@ import {expect} from 'code';
 import {getDefaultState} from '../../src/state';
 import takeHomeReducer from '../../src/reducer';
 
-describe('Given the take home reducer', () => {
+describe('Given the salary calculator reducer', () => {
 
     let chance,
         initialState;

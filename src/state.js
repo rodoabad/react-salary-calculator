@@ -2,29 +2,27 @@ import BigNumber from 'bignumber.js';
 import moment from 'moment';
 import t from 'tcomb';
 
-class TakeHome extends t.struct({
+const yearlyIncome = salary =>
+    new BigNumber(salary)
+        .dividedBy(12)
+        .round(2)
+        .toNumber();
+
+const SalaryCalculator = t.struct({
     salary: t.Number,
-    taxYear: t.Number
+    taxYear: t.Number,
+    yearlyIncome: t.Function
 }, {
-    name: 'TakeHome',
+    name: 'SalaryCalculator',
     strict: true
-}) {
-
-    yearlyIncome() {
-
-        return new BigNumber(this.salary)
-            .dividedBy(12)
-            .round(2)
-            .toNumber();
-
-    }
-
-}
+});
 
 export const getDefaultState = () =>
-    new TakeHome({
+    new SalaryCalculator({
         salary: 0,
-        taxYear: moment().year()
+        taxYear: moment().year(),
+        yearlyIncome
+
     });
 
-export default TakeHome;
+export default SalaryCalculator;

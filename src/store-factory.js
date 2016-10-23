@@ -1,18 +1,9 @@
 import * as storeConfigurator from './store-configurator';
-import {combineReducers} from 'redux';
 import reducer from './reducer';
 
 let store;
 
-const createStore = () => {
-
-    const combinedReducers = combineReducers({
-        ...reducer
-    });
-
-    return storeConfigurator.create(combinedReducers);
-
-};
+const createStore = () => storeConfigurator.create(reducer);
 
 export const getStore = () => {
 
