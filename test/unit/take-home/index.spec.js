@@ -1,6 +1,6 @@
 import Chance from 'chance';
 import React from 'react';
-import {TakeHome} from '../../../src/take-home/';
+import TakeHome from '../../../src/take-home/';
 import {expect} from 'code';
 import {shallow} from 'enzyme';
 import sinon from 'sinon';

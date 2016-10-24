@@ -1,7 +1,7 @@
 import * as actionCreators from '../../src/action-creators';
 import React from 'react';
 import StateConnector from '../../src/state-connector';
-import {TakeHome} from '../../src/take-home';
+import TakeHome from '../../src/take-home';
 import {expect} from 'code';
 import {getDefaultState} from '../../src/state';
 import {mockReduxStore} from '../utils/mock-redux-store';

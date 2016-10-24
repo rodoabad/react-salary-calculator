@@ -23,6 +23,4 @@ TakeHome.propTypes = {
     salary: PropTypes.number.isRequired
 };
 
-export {
-    TakeHome
-};
+export default TakeHome;
