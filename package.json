@@ -23,9 +23,9 @@
     }
   },
   "dependencies": {
-    "babel-runtime": "^6.11.6",
+    "babel-runtime": "^6.18.0",
     "bignumber.js": "^2.4.0",
-    "moment": "^2.15.1",
+    "moment": "^2.15.2",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
@@ -40,9 +40,9 @@
     "chance": "^1.0.4",
     "code": "^4.0.0",
     "enzyme": "^2.5.1",
-    "eslint-config-rodoabad": "^1.9.0",
+    "eslint-config-rodoabad": "^1.13.1",
     "ghooks": "^1.3.2",
-    "katulong": "^2.23.0",
+    "katulong": "^2.34.0",
     "mocha-clean": "^1.0.0",
     "react-addons-perf": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
