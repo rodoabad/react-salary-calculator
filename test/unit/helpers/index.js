@@ -43,4 +43,72 @@ describe('Given the salary calculator helper functions', () => {
 
     });
 
+    context('when calling the `marginalTax` method', () => {
+
+        context('and when the taxable income is `0`', () => {
+
+            it('should return the marginal tax', () => {
+
+                const expectedMarginalTax = 0;
+
+                const taxableIncome = helpers.taxableIncome(5000);
+
+                const actualMarginalTax = helpers.marginalTax(taxableIncome);
+
+                expect(actualMarginalTax).number().equal(expectedMarginalTax);
+
+            });
+
+        });
+
+        context('and when the taxable income is less than or equal to `9275`', () => {
+
+            it('should return the marginal tax', () => {
+
+                const expectedMarginalTax = 927.5;
+
+                const taxableIncome = helpers.taxableIncome(19625);
+
+                const actualMarginalTax = helpers.marginalTax(taxableIncome);
+
+                expect(actualMarginalTax).number().equal(expectedMarginalTax);
+
+            });
+
+        });
+
+        context('and when the taxable income is greater than `9275` but less than `37650`', () => {
+
+            it('should return the marginal tax', () => {
+
+                const expectedMarginalTax = 5183.75;
+
+                const taxableIncome = helpers.taxableIncome(48000);
+
+                const actualMarginalTax = helpers.marginalTax(taxableIncome);
+
+                expect(actualMarginalTax).number().equal(expectedMarginalTax);
+
+            });
+
+        });
+
+        context('and when the taxable income is greater than `37650` but less than `91150`', () => {
+
+            it('should return the marginal tax', () => {
+
+                const expectedMarginalTax = 18558.75;
+
+                const taxableIncome = helpers.taxableIncome(101500);
+
+                const actualMarginalTax = helpers.marginalTax(taxableIncome);
+
+                expect(actualMarginalTax).number().equal(expectedMarginalTax);
+
+            });
+
+        });
+
+    });
+
 });
