@@ -18,8 +18,9 @@
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm run test",
-      "commit-msg": "validate-commit-msg"
+      "pre-commit": "npm run pkg:test/unit",
+      "commit-msg": "validate-commit-msg",
+      "pre-push": "npm run test"
     }
   },
   "dependencies": {
@@ -55,7 +56,7 @@
     "pkg:coverage": "katulong coverage",
     "pkg:eslint": "katulong eslint",
     "pkg:preview": "katulong preview",
-    "pkg:test/unit": "katulong test --reporter spec --files ./test/unit",
-    "test": "npm run pkg:eslint && npm run pkg:coverage"
+    "pkg:test/unit": "katulong test --reporter dot --files ./test/unit",
+    "test": "npm run pkg:eslint && npm run pkg:test/unit"
   }
 }
