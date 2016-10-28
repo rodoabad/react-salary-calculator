@@ -45,16 +45,16 @@ describe('Given the salary calculator reducer', () => {
 
         it('should update the salary', () => {
 
-            const newSalary = chance.natural();
+            const expectedSalary = chance.natural();
 
             const updateSalaryAction = {
-                newSalary,
+                salary: expectedSalary,
                 type: actions.UPDATE_SALARY
             };
 
             const nextState = takeHomeReducer(initialState, updateSalaryAction);
 
-            expect(nextState.salary).number().equal(newSalary);
+            expect(nextState.salary).number().equal(expectedSalary);
 
         });
 

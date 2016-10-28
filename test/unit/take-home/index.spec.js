@@ -14,19 +14,19 @@ describe('Given the <TakeHome/> component', () => {
 
     beforeEach(() => {
 
+        chance = new Chance();
         sandbox = sinon.sandbox.create();
 
     });
 
     beforeEach(() => {
 
-        chance = new Chance();
-
         testProps = Object.freeze({
             actions: {
                 updateSalary: sandbox.stub()
             },
-            salary: chance.natural()
+            salary: chance.natural(),
+            taxableIncome: chance.natural()
         });
 
         takeHomeEl = shallow(<TakeHome {...testProps}/>);
@@ -81,6 +81,32 @@ describe('Given the <TakeHome/> component', () => {
 
             sinon.assert.calledOnce(testProps.actions.updateSalary);
             sinon.assert.calledWithExactly(testProps.actions.updateSalary, expectedValue);
+
+        });
+
+    });
+
+    describe('and its taxable income section', () => {
+
+        let taxableIncomeEl;
+
+        beforeEach(() => {
+
+            taxableIncomeEl = takeHomeEl.childAt(1);
+
+        });
+
+        it('should be a <section/>', () => {
+
+            expect(taxableIncomeEl.type()).string().equal('section');
+
+        });
+
+        it('should display the taxable income from `taxableIncome`', () => {
+
+            const expectedText = `Taxable Income: $${testProps.taxableIncome}`;
+
+            expect(taxableIncomeEl.text()).string().equal(expectedText);
 
         });
 

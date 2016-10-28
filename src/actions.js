@@ -1,4 +1,5 @@
 export default Object.freeze({
     UPDATE_SALARY: 'UPDATE_SALARY',
+    UPDATE_TAXABLE_INCOME: 'UPDATE_TAXABLE_INCOME',
     UPDATE_YEAR: 'UPDATE_YEAR'
 });

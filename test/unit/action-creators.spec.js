@@ -1,36 +1,73 @@
 import * as actionCreators from '../../src/action-creators';
+import * as helpers from '../../src/helpers';
+import Chance from 'chance';
 import actions from '../../src/actions';
 import {expect} from 'code';
+import sinon from 'sinon';
 
 describe('Given the action creators for salary calculator', () => {
 
-    describe('when updating the salary', () => {
+    let chance,
+        sandbox;
 
-        let updateSalaryAction;
+    beforeEach(() => {
+
+        chance = new Chance();
+        sandbox = sinon.sandbox.create();
+
+    });
+
+    afterEach(() => {
+
+        sandbox.restore();
+
+    });
+
+    context('when updating the salary', () => {
+
+        let dispatch,
+            expectedSalary,
+            expectedTaxableIncome,
+            getTaxableIncome;
 
         beforeEach(() => {
 
-            updateSalaryAction = actionCreators.updateSalary(100);
+            expectedSalary = chance.natural();
+            expectedTaxableIncome = chance.natural();
+
+            dispatch = sandbox.stub();
+            getTaxableIncome = sandbox.stub(helpers, 'taxableIncome').withArgs(expectedSalary).returns(expectedTaxableIncome);
+
+            actionCreators.updateSalary(expectedSalary)(dispatch);
 
         });
 
-        it('should have a type', () => {
+        it('should update the salary', () => {
 
-            expect(updateSalaryAction.type).string().equal(actions.UPDATE_SALARY);
+            const expectedAction = {
+                salary: expectedSalary,
+                type: actions.UPDATE_SALARY
+            };
+
+            sinon.assert.calledWithExactly(dispatch, expectedAction);
 
         });
 
-        it('should have a new salary', () => {
+        it('should update the taxable income', () => {
 
-            const expectedNewSalary = 100;
+            const expectedAction = {
+                taxableIncome: expectedTaxableIncome,
+                type: actions.UPDATE_TAXABLE_INCOME
+            };
 
-            expect(updateSalaryAction.newSalary).number().equal(expectedNewSalary);
+            sinon.assert.calledWithExactly(getTaxableIncome, expectedSalary);
+            sinon.assert.calledWithExactly(dispatch, expectedAction);
 
         });
 
     });
 
-    describe('when updating the year', () => {
+    context('when updating the year', () => {
 
         let updateYearAction;
 

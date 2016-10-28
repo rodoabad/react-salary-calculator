@@ -9,6 +9,12 @@ describe('Given the salary calculator actions', () => {
 
     });
 
+    it('should update the taxable income', () => {
+
+        expect(actions.UPDATE_TAXABLE_INCOME).string().equal('UPDATE_TAXABLE_INCOME');
+
+    });
+
     it('should update the year', () => {
 
         expect(actions.UPDATE_YEAR).string().equal('UPDATE_YEAR');

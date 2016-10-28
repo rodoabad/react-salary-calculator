@@ -15,12 +15,14 @@ const TakeHome = props =>
             type='number'
             value={props.salary}
         />
+        <section>{`Taxable Income: $${props.taxableIncome}`}</section>
     </section>;
 
 TakeHome.displayName = 'TakeHome';
 TakeHome.propTypes = {
     actions: PropTypes.object.isRequired,
-    salary: PropTypes.number.isRequired
+    salary: PropTypes.number.isRequired,
+    taxableIncome: PropTypes.number.isRequired
 };
 
 export default TakeHome;
