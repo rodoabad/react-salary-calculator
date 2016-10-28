@@ -109,6 +109,22 @@ describe('Given the salary calculator helper functions', () => {
 
         });
 
+        context('and when the taxable income is greater than `91150` but less than `190150`', () => {
+
+            it('should return the marginal tax', () => {
+
+                const expectedMarginalTax = 46278.75;
+
+                const taxableIncome = helpers.taxableIncome(200500);
+
+                const actualMarginalTax = helpers.marginalTax(taxableIncome);
+
+                expect(actualMarginalTax).number().equal(expectedMarginalTax);
+
+            });
+
+        });
+
     });
 
 });

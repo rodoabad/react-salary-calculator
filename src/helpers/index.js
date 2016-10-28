@@ -34,12 +34,24 @@ const get25PercentRate = taxableIncome =>
         .times(0.25)
         .toNumber();
 
+const get28PercentRate = taxableIncome =>
+    taxableIncome > 190150 ?
+    new BigNumber(190150)
+        .minus(91150)
+        .times(0.28)
+        .toNumber() :
+    new BigNumber(taxableIncome)
+        .minus(91150)
+        .times(0.28)
+        .toNumber();
+
 const marginalTax = taxableIncome => {
 
     const marginalRates = [
         get10PercentRate(taxableIncome),
         get15PercentRate(taxableIncome),
-        get25PercentRate(taxableIncome)
+        get25PercentRate(taxableIncome),
+        get28PercentRate(taxableIncome)
     ];
 
     return marginalRates
