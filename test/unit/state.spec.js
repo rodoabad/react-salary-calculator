@@ -53,18 +53,17 @@ describe('Given the salary calculator state', () => {
 
         });
 
-        it('should have `year`', () => {
+        it('should have `taxYear`', () => {
 
             expect(defaultState.taxYear).number().equal(mockYear);
 
         });
 
-        it('should have `yearlyIncome`', () => {
+        it('should have `taxableIncome`', () => {
 
-            const mockSalary = 1000;
-            const expectedYearlyIncome = 83.33;
+            const expectedTaxableIncome = 0;
 
-            expect(defaultState.yearlyIncome(mockSalary)).number().equal(expectedYearlyIncome);
+            expect(defaultState.taxableIncome).number().equal(expectedTaxableIncome);
 
         });
 
