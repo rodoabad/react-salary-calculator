@@ -17,7 +17,7 @@ describe('Given the salary calculator reducer', () => {
 
     });
 
-    describe('when passing invalid arguments', () => {
+    context('when passing invalid arguments', () => {
 
         it('should return the default state if you pass an undefined state', () => {
 
@@ -41,7 +41,7 @@ describe('Given the salary calculator reducer', () => {
 
     });
 
-    describe('when updating the salary', () => {
+    context('when updating the salary', () => {
 
         it('should update the salary', () => {
 
@@ -55,6 +55,25 @@ describe('Given the salary calculator reducer', () => {
             const nextState = takeHomeReducer(initialState, updateSalaryAction);
 
             expect(nextState.salary).number().equal(expectedSalary);
+
+        });
+
+    });
+
+    context('when updating the taxable income', () => {
+
+        it('should update the taxable income', () => {
+
+            const expectedTaxableIncome = chance.natural();
+
+            const updateTaxableIncomeAction = {
+                taxableIncome: expectedTaxableIncome,
+                type: actions.UPDATE_TAXABLE_INCOME
+            };
+
+            const nextState = takeHomeReducer(initialState, updateTaxableIncomeAction);
+
+            expect(nextState.taxableIncome).number().equal(expectedTaxableIncome);
 
         });
 
