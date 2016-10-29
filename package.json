@@ -46,7 +46,7 @@
     "mocha-clean": "^1.0.0",
     "react-addons-perf": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
-    "redux-logger": "^2.7.0",
+    "redux-logger": "2.7.0",
     "sinon": "^1.17.6",
     "stylelint-config-semantic": "^3.0.0",
     "validate-commit-msg": "^2.8.2"
