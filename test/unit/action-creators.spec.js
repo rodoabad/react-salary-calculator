@@ -71,6 +71,21 @@ describe('Given the action creators for salary calculator', () => {
 
     context('when updating the filing status', () => {
 
+        it('should update the filing status', () => {
+
+            const expectedFilingStatus = chance.string();
+
+            const expectedAction = {
+                filingStatus: expectedFilingStatus,
+                type: actions.UPDATE_FILING_STATUS
+            };
+
+            actionCreators.updateFilingStatus(expectedFilingStatus)(dispatch);
+
+            sinon.assert.calledWithExactly(dispatch, expectedAction);
+
+        });
+
     });
 
     context('when updating the year', () => {

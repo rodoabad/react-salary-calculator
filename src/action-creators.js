@@ -17,7 +17,12 @@ export const updateSalary = salary =>
     };
 
 export const updateFilingStatus = filingStatus =>
-    (dispatch, getState) => {
+    dispatch => {
+
+        dispatch({
+            filingStatus,
+            type: actions.UPDATE_FILING_STATUS
+        })
 
     };
 
