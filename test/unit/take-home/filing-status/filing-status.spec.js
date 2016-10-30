@@ -50,7 +50,7 @@ describe('Given the <FilingStatus/> component', () => {
 
     });
 
-    context('and its select options', () => {
+    describe('and its select options', () => {
 
         let selectOptionsEl;
 

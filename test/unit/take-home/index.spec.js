@@ -47,7 +47,7 @@ describe('Given the <TakeHome/> component', () => {
 
     });
 
-    context('and its salary input', () => {
+    describe('and its salary input', () => {
 
         let inputSalaryEl;
 
@@ -88,7 +88,7 @@ describe('Given the <TakeHome/> component', () => {
 
     });
 
-    context('and its taxable income section', () => {
+    describe('and its taxable income section', () => {
 
         let taxableIncomeEl;
 
@@ -114,7 +114,7 @@ describe('Given the <TakeHome/> component', () => {
 
     });
 
-    context('and its federal tax section', () => {
+    describe('and its federal tax section', () => {
 
         let federalTaxEl;
 
