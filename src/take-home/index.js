@@ -16,11 +16,13 @@ const TakeHome = props =>
             value={props.salary}
         />
         <section>{`Taxable Income: $${props.taxableIncome}`}</section>
+        <section>{`Federal Tax: $${props.federalTax}`}</section>
     </section>;
 
 TakeHome.displayName = 'TakeHome';
 TakeHome.propTypes = {
     actions: PropTypes.object.isRequired,
+    federalTax: PropTypes.number.isRequired,
     salary: PropTypes.number.isRequired,
     taxableIncome: PropTypes.number.isRequired
 };

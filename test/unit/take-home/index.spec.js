@@ -25,6 +25,8 @@ describe('Given the <TakeHome/> component', () => {
             actions: {
                 updateSalary: sandbox.stub()
             },
+            federalTax: chance.natural(),
+            filingstatus: chance.string(),
             salary: chance.natural(),
             taxableIncome: chance.natural()
         });
@@ -45,7 +47,7 @@ describe('Given the <TakeHome/> component', () => {
 
     });
 
-    describe('and its salary input', () => {
+    context('and its salary input', () => {
 
         let inputSalaryEl;
 
@@ -61,7 +63,7 @@ describe('Given the <TakeHome/> component', () => {
 
         });
 
-        it('should have `salary` as the `value`', () => {
+        it('should show `salary` as the `value`', () => {
 
             expect(inputSalaryEl.props().value).number().equal(testProps.salary);
 
@@ -86,7 +88,7 @@ describe('Given the <TakeHome/> component', () => {
 
     });
 
-    describe('and its taxable income section', () => {
+    context('and its taxable income section', () => {
 
         let taxableIncomeEl;
 
@@ -107,6 +109,32 @@ describe('Given the <TakeHome/> component', () => {
             const expectedText = `Taxable Income: $${testProps.taxableIncome}`;
 
             expect(taxableIncomeEl.text()).string().equal(expectedText);
+
+        });
+
+    });
+
+    context('and its federal tax section', () => {
+
+        let federalTaxEl;
+
+        beforeEach(() => {
+
+            federalTaxEl = takeHomeEl.childAt(2);
+
+        });
+
+        it('should be a <section/>', () => {
+
+            expect(federalTaxEl.type()).string().equal('section');
+
+        });
+
+        it('should display the federal tax from `federalTax`', () => {
+
+            const expectedText = `Federal Tax: $${testProps.federalTax}`;
+
+            expect(federalTaxEl.text()).string().equal(expectedText);
 
         });
 
