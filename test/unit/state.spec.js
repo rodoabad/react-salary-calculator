@@ -45,7 +45,48 @@ describe('Given the salary calculator state', () => {
 
         });
 
-        it('should have `salary`', () => {
+        it('should have a federal tax that defaults to `0`', () => {
+
+            const expectedFederalTax = 0;
+
+            expect(defaultState.federalTax).number().equal(expectedFederalTax);
+
+        });
+
+        it('should have a filing status that defaults to `single`', () => {
+
+            const expectedFilingStatus = 'single';
+
+            expect(defaultState.filingStatus).string().equal(expectedFilingStatus);
+
+        });
+
+        it('should have a filing status list', () => {
+
+            const expectedFilingStatusList = [
+                {
+                    label: 'Head of Household',
+                    value: 'headOfHousehold'
+                },
+                {
+                    label: 'Married (Joint)',
+                    value: 'marriedJoint'
+                },
+                {
+                    label: 'Married (Separate)',
+                    value: 'marriedSeparate'
+                },
+                {
+                    label: 'Single',
+                    value: 'single'
+                }
+            ];
+
+            expect(defaultState.filingStatusList).array().equal(expectedFilingStatusList);
+
+        });
+
+        it('should have a salary that defaults to `0`', () => {
 
             const expectedSalary = 0;
 
@@ -53,13 +94,13 @@ describe('Given the salary calculator state', () => {
 
         });
 
-        it('should have `taxYear`', () => {
+        it('should have tax year that defaults to the current year', () => {
 
             expect(defaultState.taxYear).number().equal(mockYear);
 
         });
 
-        it('should have `taxableIncome`', () => {
+        it('should have a taxable income that defaults to `0`', () => {
 
             const expectedTaxableIncome = 0;
 
