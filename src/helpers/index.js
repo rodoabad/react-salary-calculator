@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import BigNumber from 'bignumber.js';
 
 const filingStatusSingle = 6300;
@@ -134,3 +136,5 @@ export {
     getFederalTax,
     getTaxableIncome
 };
+
+/* eslint-enable max-lines */

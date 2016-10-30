@@ -22,7 +22,7 @@ export const updateFilingStatus = filingStatus =>
         dispatch({
             filingStatus,
             type: actions.UPDATE_FILING_STATUS
-        })
+        });
 
     };
 
