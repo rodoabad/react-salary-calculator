@@ -43,35 +43,41 @@ describe('Given the salary calculator reducer', () => {
 
     context('when updating the salary', () => {
 
-        it('should update the salary', () => {
+        let expectedFederalTax,
+            expectedSalary,
+            expectedTaxableIncome,
+            nextState;
 
-            const expectedSalary = chance.natural();
+        beforeEach(() => {
+
+            expectedFederalTax = chance.natural();
+            expectedSalary = chance.natural();
+            expectedTaxableIncome = chance.natural();
 
             const updateSalaryAction = {
+                federalTax: expectedFederalTax,
                 salary: expectedSalary,
+                taxableIncome: expectedTaxableIncome,
                 type: actions.UPDATE_SALARY
             };
 
-            const nextState = takeHomeReducer(initialState, updateSalaryAction);
+            nextState = takeHomeReducer(initialState, updateSalaryAction);
+
+        });
+
+        it('should update the federal tax', () => {
+
+            expect(nextState.federalTax).number().equal(expectedFederalTax);
+
+        });
+
+        it('should update the salary', () => {
 
             expect(nextState.salary).number().equal(expectedSalary);
 
         });
 
-    });
-
-    context('when updating the taxable income', () => {
-
         it('should update the taxable income', () => {
-
-            const expectedTaxableIncome = chance.natural();
-
-            const updateTaxableIncomeAction = {
-                taxableIncome: expectedTaxableIncome,
-                type: actions.UPDATE_TAXABLE_INCOME
-            };
-
-            const nextState = takeHomeReducer(initialState, updateTaxableIncomeAction);
 
             expect(nextState.taxableIncome).number().equal(expectedTaxableIncome);
 

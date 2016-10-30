@@ -17,26 +17,27 @@ describe('Given the action creators for salary calculator', () => {
 
     });
 
-    afterEach(() => {
-
-        sandbox.restore();
-
-    });
+    afterEach(() => sandbox.restore());
 
     context('when updating the salary', () => {
 
         let dispatch,
+            expectedFederalTax,
             expectedSalary,
             expectedTaxableIncome,
+            getFederalTax,
             getTaxableIncome;
 
         beforeEach(() => {
 
             expectedSalary = chance.natural();
             expectedTaxableIncome = chance.natural();
+            expectedFederalTax = chance.natural();
 
             dispatch = sandbox.stub();
-            getTaxableIncome = sandbox.stub(helpers, 'taxableIncome').withArgs(expectedSalary).returns(expectedTaxableIncome);
+
+            getTaxableIncome = sandbox.stub(helpers, 'getTaxableIncome').withArgs(expectedSalary).returns(expectedTaxableIncome);
+            getFederalTax = sandbox.stub(helpers, 'getFederalTax').withArgs(expectedTaxableIncome).returns(expectedFederalTax);
 
             actionCreators.updateSalary(expectedSalary)(dispatch);
 
@@ -45,22 +46,15 @@ describe('Given the action creators for salary calculator', () => {
         it('should update the salary', () => {
 
             const expectedAction = {
+                federalTax: expectedFederalTax,
                 salary: expectedSalary,
+                taxableIncome: expectedTaxableIncome,
                 type: actions.UPDATE_SALARY
             };
 
-            sinon.assert.calledWithExactly(dispatch, expectedAction);
-
-        });
-
-        it('should update the taxable income', () => {
-
-            const expectedAction = {
-                taxableIncome: expectedTaxableIncome,
-                type: actions.UPDATE_TAXABLE_INCOME
-            };
-
             sinon.assert.calledWithExactly(getTaxableIncome, expectedSalary);
+            sinon.assert.calledWithExactly(getFederalTax, expectedTaxableIncome);
+
             sinon.assert.calledWithExactly(dispatch, expectedAction);
 
         });

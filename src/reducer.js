@@ -3,24 +3,18 @@ import actions from './actions';
 
 const updateSalary = (state, action) =>
     SalaryCalculator.update(state, {
-        salary: {
-            $set: action.salary
-        }
-    });
-
-const updateTaxableIncome = (state, action) =>
-    SalaryCalculator.update(state, {
-        taxableIncome: {
-            $set: action.taxableIncome
+        $merge: {
+            federalTax: action.federalTax,
+            salary: action.salary,
+            taxableIncome: action.taxableIncome
         }
     });
 
 const actionTypes = {
-    [actions.UPDATE_SALARY]: updateSalary,
-    [actions.UPDATE_TAXABLE_INCOME]: updateTaxableIncome
+    [actions.UPDATE_SALARY]: updateSalary
 };
 
-export default (state = getDefaultState(), action) => {
+const nextState = (state = getDefaultState(), action) => {
 
     const reducer = actionTypes[action.type];
 
@@ -29,3 +23,5 @@ export default (state = getDefaultState(), action) => {
            state;
 
 };
+
+export default nextState;

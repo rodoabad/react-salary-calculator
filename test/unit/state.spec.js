@@ -53,14 +53,6 @@ describe('Given the salary calculator state', () => {
 
         });
 
-        it('should have a filing status that defaults to `single`', () => {
-
-            const expectedFilingStatus = 'single';
-
-            expect(defaultState.filingStatus).string().equal(expectedFilingStatus);
-
-        });
-
         it('should have a filing status list', () => {
 
             const expectedFilingStatusList = [
@@ -91,6 +83,14 @@ describe('Given the salary calculator state', () => {
             const expectedSalary = 0;
 
             expect(defaultState.salary).number().equal(expectedSalary);
+
+        });
+
+        it('should have a filing status that defaults to `single`', () => {
+
+            const expectedFilingStatus = 'single';
+
+            expect(defaultState.selectedFilingStatus).string().equal(expectedFilingStatus);
 
         });
 
