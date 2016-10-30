@@ -13,6 +13,10 @@ describe('Given the salary calculator reducer', () => {
 
         chance = new Chance();
 
+    });
+
+    beforeEach(() => {
+
         initialState = getDefaultState();
 
     });

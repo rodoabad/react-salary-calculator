@@ -16,12 +16,20 @@ describe('Given the salary calculator state', () => {
         chance = new Chance();
         sandbox = sinon.sandbox.create();
 
+    });
+
+    beforeEach(() => {
+
         mockYear = chance.natural();
         sandbox.stub(moment, 'year').returns(mockYear);
 
     });
 
-    afterEach(() => sandbox.restore());
+    afterEach(() => {
+
+        sandbox.restore();
+
+    });
 
     it('should have a type name', () => {
 

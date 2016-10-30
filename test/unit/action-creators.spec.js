@@ -8,6 +8,7 @@ import sinon from 'sinon';
 describe('Given the action creators for salary calculator', () => {
 
     let chance,
+        dispatch,
         sandbox;
 
     beforeEach(() => {
@@ -17,12 +18,21 @@ describe('Given the action creators for salary calculator', () => {
 
     });
 
-    afterEach(() => sandbox.restore());
+    beforeEach(() => {
+
+        dispatch = sandbox.stub();
+
+    });
+
+    afterEach(() => {
+
+        sandbox.restore();
+
+    });
 
     context('when updating the salary', () => {
 
-        let dispatch,
-            expectedFederalTax,
+        let expectedFederalTax,
             expectedSalary,
             expectedTaxableIncome,
             getFederalTax,
@@ -33,8 +43,6 @@ describe('Given the action creators for salary calculator', () => {
             expectedSalary = chance.natural();
             expectedTaxableIncome = chance.natural();
             expectedFederalTax = chance.natural();
-
-            dispatch = sandbox.stub();
 
             getTaxableIncome = sandbox.stub(helpers, 'getTaxableIncome').withArgs(expectedSalary).returns(expectedTaxableIncome);
             getFederalTax = sandbox.stub(helpers, 'getFederalTax').withArgs(expectedTaxableIncome).returns(expectedFederalTax);
@@ -58,6 +66,10 @@ describe('Given the action creators for salary calculator', () => {
             sinon.assert.calledWithExactly(dispatch, expectedAction);
 
         });
+
+    });
+
+    context('when updating the filing status', () => {
 
     });
 

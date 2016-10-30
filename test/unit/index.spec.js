@@ -16,6 +16,10 @@ describe('Given the <SalaryCalculator/> component', () => {
 
         sandbox = sinon.sandbox.create();
 
+    });
+
+    beforeEach(() => {
+
         testProps = Object.freeze({
             store: {
                 dispatch: sandbox.stub(),
