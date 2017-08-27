@@ -33,4 +33,19 @@ describe('Given the social security calculator', () => {
 
     });
 
+    context('and the gross income is `56756`', () => {
+
+        it('should have the correct social security', () => {
+
+            const grossIncome = 56756;
+            const expectedSocialSecurityTax = 4341.83;
+
+            const actualSocialSecurityTax = getSocialSecurity(grossIncome, 'SINGLE');
+
+            expect(actualSocialSecurityTax).number().equal(expectedSocialSecurityTax);
+
+        });
+
+    });
+
 });

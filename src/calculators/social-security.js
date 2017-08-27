@@ -17,7 +17,7 @@ const getOldAgeSurvivorsAndDisabilityInsurance = grossIncome => {
 const getMedicareTax = (grossIncome, filingStatus) => {
 
     const INITIAL_MEDICARE_MULTIPLIER = 0.0145;
-    const ADDITIONAL_MEDICARE_MULTIPLER_FOR_HIGH_EARNERS = 0.009;
+    const ADDITIONAL_MEDICARE_MULTIPLIER_FOR_HIGH_EARNERS = 0.009;
 
     const initialMedicareTax = new BigNumber(grossIncome)
         .times(INITIAL_MEDICARE_MULTIPLIER)
@@ -27,7 +27,7 @@ const getMedicareTax = (grossIncome, filingStatus) => {
 
         const moreMedicareTax = new BigNumber(grossIncome)
             .minus(additionalMedicareTax.get(filingStatus))
-            .times(ADDITIONAL_MEDICARE_MULTIPLER_FOR_HIGH_EARNERS)
+            .times(ADDITIONAL_MEDICARE_MULTIPLIER_FOR_HIGH_EARNERS)
             .toNumber();
 
         return new BigNumber(initialMedicareTax)
@@ -48,6 +48,7 @@ export const getSocialSecurity = (grossIncome, filingStatus) => {
 
     const socialSecurityTax = new BigNumber(oldAgeSurvivorsAndDisabilityInsurance)
         .plus(medicarePortion)
+        .round(2)
         .toNumber();
 
     return socialSecurityTax;
