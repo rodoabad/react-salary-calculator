@@ -18,7 +18,7 @@ describe('Given the social security calculator', () => {
 
     });
 
-    context('and the gross income is `900000`', () => {
+    context('and the gross income is `300000`', () => {
 
         it('should have the correct social security', () => {
 
