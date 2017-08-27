@@ -6,6 +6,7 @@ const updateSalary = (state, action) =>
         $merge: {
             federalTax: action.federalTax,
             salary: action.salary,
+            socialSecurity: action.socialSecurity,
             taxableIncome: action.taxableIncome
         }
     });

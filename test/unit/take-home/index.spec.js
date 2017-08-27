@@ -28,6 +28,7 @@ describe('Given the <TakeHome/> component', () => {
             federalTax: chance.natural(),
             filingstatus: chance.string(),
             salary: chance.natural(),
+            socialSecurity: chance.natural(),
             taxableIncome: chance.natural()
         });
 
@@ -135,6 +136,32 @@ describe('Given the <TakeHome/> component', () => {
             const expectedText = `Federal Tax: $${testProps.federalTax}`;
 
             expect(federalTaxEl.text()).string().equal(expectedText);
+
+        });
+
+    });
+
+    describe('and its social security section', () => {
+
+        let socialSecurityEl;
+
+        beforeEach(() => {
+
+            socialSecurityEl = takeHomeEl.childAt(3);
+
+        });
+
+        it('should be a <section/>', () => {
+
+            expect(socialSecurityEl.type()).string().equal('section');
+
+        });
+
+        it('should display the social security from `socialSecurity`', () => {
+
+            const expectedText = `Social Security: $${testProps.socialSecurity}`;
+
+            expect(socialSecurityEl.text()).string().equal(expectedText);
 
         });
 

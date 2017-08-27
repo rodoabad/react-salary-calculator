@@ -14,6 +14,7 @@ const SalaryCalculator = t.struct({
         marriedSeparate: 'MarriedSeparate',
         single: 'Single'
     }, 'FilingStatus'),
+    socialSecurity: t.Number,
     taxYear: t.Number,
     taxableIncome: t.Number
 }, {
@@ -44,6 +45,7 @@ export const getDefaultState = () =>
         ],
         salary: 0,
         selectedFilingStatus: 'single',
+        socialSecurity: 0,
         taxYear: moment().year(),
         taxableIncome: 0
     });

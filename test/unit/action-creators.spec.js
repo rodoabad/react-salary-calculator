@@ -34,16 +34,19 @@ describe('Given the action creators for salary calculator', () => {
 
         let expectedFederalTax,
             expectedSalary,
+            expectedSocialSecurity,
             expectedTaxableIncome;
 
         beforeEach(() => {
 
             expectedSalary = chance.natural();
             expectedTaxableIncome = chance.natural();
+            expectedSocialSecurity = chance.natural();
             expectedFederalTax = chance.natural();
 
             sandbox.stub(helpers, 'getTaxableIncome').withArgs(expectedSalary, 'SINGLE').returns(expectedTaxableIncome);
             sandbox.stub(helpers, 'getFederalTax').withArgs(expectedTaxableIncome, 'SINGLE', 0).returns(expectedFederalTax);
+            sandbox.stub(helpers, 'getSocialSecurity').withArgs(expectedSalary, 'SINGLE').returns(expectedSocialSecurity);
 
             actionCreators.updateSalary(expectedSalary)(dispatch);
 
@@ -54,6 +57,7 @@ describe('Given the action creators for salary calculator', () => {
             const expectedAction = {
                 federalTax: expectedFederalTax,
                 salary: expectedSalary,
+                socialSecurity: expectedSocialSecurity,
                 taxableIncome: expectedTaxableIncome,
                 type: actions.UPDATE_SALARY
             };

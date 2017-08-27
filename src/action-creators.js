@@ -1,4 +1,4 @@
-import {getFederalTax, getTaxableIncome} from './calculators';
+import {getFederalTax, getSocialSecurity, getTaxableIncome} from './calculators';
 import actions from './actions';
 
 export const updateSalary = salary =>
@@ -9,10 +9,14 @@ export const updateSalary = salary =>
 
         const taxableIncome = getTaxableIncome(salary, filingStatus, dependents);
         const federalTax = getFederalTax(taxableIncome, filingStatus, dependents);
+        const socialSecurity = getSocialSecurity(salary, filingStatus);
+
+        console.log(socialSecurity)
 
         dispatch({
             federalTax,
             salary,
+            socialSecurity,
             taxableIncome,
             type: actions.UPDATE_SALARY
         });

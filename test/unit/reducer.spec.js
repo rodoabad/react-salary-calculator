@@ -49,6 +49,7 @@ describe('Given the salary calculator reducer', () => {
 
         let expectedFederalTax,
             expectedSalary,
+            expectedSocialSecurity,
             expectedTaxableIncome,
             nextState;
 
@@ -56,11 +57,13 @@ describe('Given the salary calculator reducer', () => {
 
             expectedFederalTax = chance.natural();
             expectedSalary = chance.natural();
+            expectedSocialSecurity = chance.natural();
             expectedTaxableIncome = chance.natural();
 
             const updateSalaryAction = {
                 federalTax: expectedFederalTax,
                 salary: expectedSalary,
+                socialSecurity: expectedSocialSecurity,
                 taxableIncome: expectedTaxableIncome,
                 type: actions.UPDATE_SALARY
             };
@@ -78,6 +81,12 @@ describe('Given the salary calculator reducer', () => {
         it('should update the salary', () => {
 
             expect(nextState.salary).number().equal(expectedSalary);
+
+        });
+
+        it('should update the social security', () => {
+
+            expect(nextState.socialSecurity).number().equal(expectedSocialSecurity);
 
         });
 
