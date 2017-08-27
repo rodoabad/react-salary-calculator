@@ -1,5 +1,5 @@
 import * as actionCreators from '../../src/action-creators';
-import * as helpers from '../../src/helpers';
+import * as helpers from '../../src/calculators';
 import Chance from 'chance';
 import actions from '../../src/actions';
 import {expect} from 'code';
@@ -34,9 +34,7 @@ describe('Given the action creators for salary calculator', () => {
 
         let expectedFederalTax,
             expectedSalary,
-            expectedTaxableIncome,
-            getFederalTax,
-            getTaxableIncome;
+            expectedTaxableIncome;
 
         beforeEach(() => {
 
@@ -44,8 +42,8 @@ describe('Given the action creators for salary calculator', () => {
             expectedTaxableIncome = chance.natural();
             expectedFederalTax = chance.natural();
 
-            getTaxableIncome = sandbox.stub(helpers, 'getTaxableIncome').withArgs(expectedSalary).returns(expectedTaxableIncome);
-            getFederalTax = sandbox.stub(helpers, 'getFederalTax').withArgs(expectedTaxableIncome).returns(expectedFederalTax);
+            sandbox.stub(helpers, 'getTaxableIncome').withArgs(expectedSalary, 'SINGLE').returns(expectedTaxableIncome);
+            sandbox.stub(helpers, 'getFederalTax').withArgs(expectedTaxableIncome, 'SINGLE', 0).returns(expectedFederalTax);
 
             actionCreators.updateSalary(expectedSalary)(dispatch);
 
@@ -59,9 +57,6 @@ describe('Given the action creators for salary calculator', () => {
                 taxableIncome: expectedTaxableIncome,
                 type: actions.UPDATE_SALARY
             };
-
-            sinon.assert.calledWithExactly(getTaxableIncome, expectedSalary);
-            sinon.assert.calledWithExactly(getFederalTax, expectedTaxableIncome);
 
             sinon.assert.calledWithExactly(dispatch, expectedAction);
 

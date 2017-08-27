@@ -1,4 +1,4 @@
-import * as helpers from '../../../src/helpers';
+import * as helpers from '../../../src/calculators';
 import Chance from 'chance';
 import {expect} from 'code';
 
@@ -23,7 +23,7 @@ describe('Given the salary calculator helper functions', () => {
 
             const expectedTaxableIncome = 0;
 
-            const actualTaxableIncome = helpers.getTaxableIncome(salary);
+            const actualTaxableIncome = helpers.getTaxableIncome(salary, 'SINGLE', 0);
 
             expect(actualTaxableIncome).number().equal(expectedTaxableIncome);
 
@@ -35,7 +35,7 @@ describe('Given the salary calculator helper functions', () => {
 
             const expectedTaxableIncome = 1;
 
-            const actualTaxableIncome = helpers.getTaxableIncome(salary);
+            const actualTaxableIncome = helpers.getTaxableIncome(salary, 'SINGLE', 0);
 
             expect(actualTaxableIncome).number().equal(expectedTaxableIncome);
 
@@ -47,7 +47,7 @@ describe('Given the salary calculator helper functions', () => {
 
             const expectedTaxableIncome = 393700.00;
 
-            const actualTaxableIncome = helpers.getTaxableIncome(salary);
+            const actualTaxableIncome = helpers.getTaxableIncome(salary, 'SINGLE', 0);
 
             expect(actualTaxableIncome).number().equal(expectedTaxableIncome);
 
@@ -63,9 +63,9 @@ describe('Given the salary calculator helper functions', () => {
 
                 const expectedFederalTax = 0;
 
-                const taxableIncome = helpers.getTaxableIncome(5000);
+                const taxableIncome = helpers.getTaxableIncome(5000, 'SINGLE', 0);
 
-                const actualFederalTax = helpers.getFederalTax(taxableIncome);
+                const actualFederalTax = helpers.getFederalTax(taxableIncome, 'SINGLE');
 
                 expect(actualFederalTax).number().equal(expectedFederalTax);
 
@@ -79,9 +79,9 @@ describe('Given the salary calculator helper functions', () => {
 
                 const expectedFederalTax = 927.5;
 
-                const taxableIncome = helpers.getTaxableIncome(19625);
+                const taxableIncome = helpers.getTaxableIncome(19625, 'SINGLE', 0);
 
-                const actualFederalTax = helpers.getFederalTax(taxableIncome);
+                const actualFederalTax = helpers.getFederalTax(taxableIncome, 'SINGLE');
 
                 expect(actualFederalTax).number().equal(expectedFederalTax);
 
@@ -95,9 +95,9 @@ describe('Given the salary calculator helper functions', () => {
 
                 const expectedFederalTax = 5183.75;
 
-                const taxableIncome = helpers.getTaxableIncome(48000);
+                const taxableIncome = helpers.getTaxableIncome(48000, 'SINGLE', 0);
 
-                const actualFederalTax = helpers.getFederalTax(taxableIncome);
+                const actualFederalTax = helpers.getFederalTax(taxableIncome, 'SINGLE');
 
                 expect(actualFederalTax).number().equal(expectedFederalTax);
 
@@ -111,9 +111,9 @@ describe('Given the salary calculator helper functions', () => {
 
                 const expectedFederalTax = 18558.75;
 
-                const taxableIncome = helpers.getTaxableIncome(101500);
+                const taxableIncome = helpers.getTaxableIncome(101500, 'SINGLE', 0);
 
-                const actualFederalTax = helpers.getFederalTax(taxableIncome);
+                const actualFederalTax = helpers.getFederalTax(taxableIncome, 'SINGLE');
 
                 expect(actualFederalTax).number().equal(expectedFederalTax);
 
@@ -127,9 +127,9 @@ describe('Given the salary calculator helper functions', () => {
 
                 const expectedFederalTax = 46278.75;
 
-                const taxableIncome = helpers.getTaxableIncome(200500);
+                const taxableIncome = helpers.getTaxableIncome(200500, 'SINGLE', 0);
 
-                const actualFederalTax = helpers.getFederalTax(taxableIncome);
+                const actualFederalTax = helpers.getFederalTax(taxableIncome, 'SINGLE');
 
                 expect(actualFederalTax).number().equal(expectedFederalTax);
 
@@ -143,9 +143,9 @@ describe('Given the salary calculator helper functions', () => {
 
                 const expectedFederalTax = 113450.25;
 
-                const taxableIncome = helpers.getTaxableIncome(400000);
+                const taxableIncome = helpers.getTaxableIncome(400000, 'SINGLE', 0);
 
-                const actualFederalTax = helpers.getFederalTax(taxableIncome);
+                const actualFederalTax = helpers.getFederalTax(taxableIncome, 'SINGLE');
 
                 expect(actualFederalTax).number().equal(expectedFederalTax);
 

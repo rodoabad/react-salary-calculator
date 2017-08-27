@@ -1,11 +1,14 @@
-import {getFederalTax, getTaxableIncome} from './helpers';
+import {getFederalTax, getTaxableIncome} from './calculators';
 import actions from './actions';
 
 export const updateSalary = salary =>
     dispatch => {
 
-        const taxableIncome = getTaxableIncome(salary);
-        const federalTax = getFederalTax(taxableIncome);
+        const filingStatus = 'SINGLE';
+        const dependents = 0;
+
+        const taxableIncome = getTaxableIncome(salary, filingStatus, dependents);
+        const federalTax = getFederalTax(taxableIncome, filingStatus, dependents);
 
         dispatch({
             federalTax,

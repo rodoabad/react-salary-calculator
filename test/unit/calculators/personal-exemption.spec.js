@@ -1,0 +1,34 @@
+import {expect} from 'code';
+import {getPersonalExemption} from '../../../src/calculators/personal-exemption';
+
+describe('Given the personal exemption calculator', () => {
+
+    it('should return the correct PEP amount based on the gross income', () => {
+
+        const grossIncome = 150000;
+        const dependents = 0;
+        const filingStatus = 'SINGLE';
+
+        const expectedPersonalExemption = 4050;
+
+        const actualPersonalExemption = getPersonalExemption(grossIncome, filingStatus, dependents);
+
+        expect(actualPersonalExemption).number().equal(expectedPersonalExemption);
+
+    });
+
+    it('should return the correct PEP amount based on the gross income', () => {
+
+        const grossIncome = 300000;
+        const dependents = 1;
+        const filingStatus = 'HEAD_OF_HOUSEHOLD';
+
+        const expectedPersonalExemption = 7128;
+
+        const actualPersonalExemption = getPersonalExemption(grossIncome, filingStatus, dependents);
+
+        expect(actualPersonalExemption).number().equal(expectedPersonalExemption);
+
+    });
+
+});

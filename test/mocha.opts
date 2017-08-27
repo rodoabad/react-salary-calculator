@@ -1,3 +1,2 @@
 --recursive
 --require mocha-clean
---require node_modules/katulong/lib/config/babel-register
