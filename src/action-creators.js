@@ -11,8 +11,6 @@ export const updateSalary = salary =>
         const federalTax = getFederalTax(taxableIncome, filingStatus, dependents);
         const socialSecurity = getSocialSecurity(salary, filingStatus);
 
-        console.log(socialSecurity)
-
         dispatch({
             federalTax,
             salary,

@@ -24,6 +24,7 @@ const getMedicareTax = (grossIncome, filingStatus) => {
         .toNumber();
 
     if (grossIncome > additionalMedicareTax.get(filingStatus)) {
+
         const moreMedicareTax = new BigNumber(grossIncome)
             .minus(additionalMedicareTax.get(filingStatus))
             .times(ADDITIONAL_MEDICARE_MULTIPLER_FOR_HIGH_EARNERS)
@@ -50,4 +51,5 @@ export const getSocialSecurity = (grossIncome, filingStatus) => {
         .toNumber();
 
     return socialSecurityTax;
+
 };
