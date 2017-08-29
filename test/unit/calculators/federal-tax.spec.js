@@ -2,7 +2,7 @@ import * as helpers from '../../../src/calculators';
 import Chance from 'chance';
 import {expect} from 'code';
 
-describe('Given the salary calculator helper functions', () => {
+describe('Given the salary calculator methods', () => {
 
     let chance;
 
@@ -12,60 +12,17 @@ describe('Given the salary calculator helper functions', () => {
 
     });
 
-    context('when calling the `getTaxableIncome` method', () => {
-
-        it('should return `0` if the salary is less than `10351`', () => {
-
-            const salary = chance.natural({
-                max: 10350,
-                min: 0
-            });
-
-            const expectedTaxableIncome = 0;
-
-            const actualTaxableIncome = helpers.getTaxableIncome(salary, 'SINGLE', 0);
-
-            expect(actualTaxableIncome).number().equal(expectedTaxableIncome);
-
-        });
-
-        it('should return a taxable income greater than `0` if the salary is greater than `10350`', () => {
-
-            const salary = 10351;
-
-            const expectedTaxableIncome = 1;
-
-            const actualTaxableIncome = helpers.getTaxableIncome(salary, 'SINGLE', 0);
-
-            expect(actualTaxableIncome).number().equal(expectedTaxableIncome);
-
-        });
-
-        it('should return a reduced taxable income if the salary is between the phaseout threshold', () => {
-
-            const salary = 400000;
-
-            const expectedTaxableIncome = 393700.00;
-
-            const actualTaxableIncome = helpers.getTaxableIncome(salary, 'SINGLE', 0);
-
-            expect(actualTaxableIncome).number().equal(expectedTaxableIncome);
-
-        });
-
-    });
-
     context('when calling the `getFederalTax` method', () => {
 
         context('and when the taxable income is `0`', () => {
 
             it('should return the marginal tax', () => {
 
-                const expectedFederalTax = 0;
+                const expectedFederalTax = 11277.5;
 
-                const taxableIncome = helpers.getTaxableIncome(5000, 'SINGLE', 0);
+                const taxableIncome = 79200;
 
-                const actualFederalTax = helpers.getFederalTax(taxableIncome, 'SINGLE');
+                const actualFederalTax = helpers.getFederalTax(taxableIncome, 'MARRIED_FILING_JOINTLY');
 
                 expect(actualFederalTax).number().equal(expectedFederalTax);
 
@@ -77,9 +34,9 @@ describe('Given the salary calculator helper functions', () => {
 
             it('should return the marginal tax', () => {
 
-                const expectedFederalTax = 927.5;
+                const expectedFederalTax = 51060.5;
 
-                const taxableIncome = helpers.getTaxableIncome(19625, 'SINGLE', 0);
+                const taxableIncome = 239600;
 
                 const actualFederalTax = helpers.getFederalTax(taxableIncome, 'SINGLE');
 
