@@ -23,7 +23,7 @@ describe('Given the personal exemption calculator', () => {
         const dependents = 1;
         const filingStatus = 'HEAD_OF_HOUSEHOLD';
 
-        const expectedPersonalExemption = 7128;
+        const expectedPersonalExemption = 7290;
 
         const actualPersonalExemption = getPersonalExemption(grossIncome, filingStatus, dependents);
 

@@ -3,8 +3,9 @@ import FilingStatus from './filing-status';
 import {connect} from 'react-redux';
 
 const getStateToBindToContainerProps = state => ({
-    filingStatusList: state.filingStatusList,
-    selectedFilingStatus: state.selectedFilingStatus
+    filingStatus: state.filingStatus,
+    filingStatuses: state.filingStatuses,
+    salary: state.salary
 });
 
 const mapBoundActionCreatorsToActionProp = (stateProps, dispatchProps) => ({

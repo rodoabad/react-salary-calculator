@@ -1,22 +1,15 @@
 import * as actionCreators from '../../src/action-creators';
-import * as helpers from '../../src/calculators';
+import * as calculators from '../../src/calculators';
 import Chance from 'chance';
 import actions from '../../src/actions';
-import {expect} from 'code';
 import sinon from 'sinon';
 
-describe('Given the action creators for salary calculator', () => {
+const chance = new Chance();
+const sandbox = sinon.sandbox.create();
 
-    let chance,
-        dispatch,
-        sandbox;
+describe('Given the action creators for the salary calculator', () => {
 
-    beforeEach(() => {
-
-        chance = new Chance();
-        sandbox = sinon.sandbox.create();
-
-    });
+    let dispatch;
 
     beforeEach(() => {
 
@@ -33,22 +26,25 @@ describe('Given the action creators for salary calculator', () => {
     context('when updating the salary', () => {
 
         let expectedFederalTax,
+            expectedFilingStatus,
             expectedSalary,
             expectedSocialSecurity,
+            expectedTakeHome,
             expectedTaxableIncome;
 
-        beforeEach(() => {
+        beforeEach(() => { // eslint-disable-line max-statements
 
-            expectedSalary = chance.natural();
-            expectedTaxableIncome = chance.natural();
-            expectedSocialSecurity = chance.natural();
             expectedFederalTax = chance.natural();
+            expectedFilingStatus = chance.string();
+            expectedSalary = chance.natural();
+            expectedSocialSecurity = chance.natural();
+            expectedTakeHome = chance.natural();
+            expectedTaxableIncome = chance.natural();
 
-            sandbox.stub(helpers, 'getTaxableIncome').withArgs(expectedSalary, 'SINGLE').returns(expectedTaxableIncome);
-            sandbox.stub(helpers, 'getFederalTax').withArgs(expectedTaxableIncome, 'SINGLE', 0).returns(expectedFederalTax);
-            sandbox.stub(helpers, 'getSocialSecurity').withArgs(expectedSalary, 'SINGLE').returns(expectedSocialSecurity);
-
-            actionCreators.updateSalary(expectedSalary)(dispatch);
+            sandbox.stub(calculators, 'getTaxableIncome').withArgs(expectedSalary, expectedFilingStatus).returns(expectedTaxableIncome);
+            sandbox.stub(calculators, 'getFederalTax').withArgs(expectedTaxableIncome, expectedFilingStatus, 0).returns(expectedFederalTax);
+            sandbox.stub(calculators, 'getSocialSecurity').withArgs(expectedSalary, expectedFilingStatus).returns(expectedSocialSecurity);
+            sandbox.stub(calculators, 'getTakeHome').withArgs(expectedSalary, expectedFederalTax, expectedSocialSecurity).returns(expectedTakeHome);
 
         });
 
@@ -56,58 +52,18 @@ describe('Given the action creators for salary calculator', () => {
 
             const expectedAction = {
                 federalTax: expectedFederalTax,
+                filingStatus: expectedFilingStatus,
                 salary: expectedSalary,
                 socialSecurity: expectedSocialSecurity,
+                takeHome: expectedTakeHome,
                 taxableIncome: expectedTaxableIncome,
                 type: actions.UPDATE_SALARY
             };
 
+            actionCreators.updateSalary(expectedSalary, expectedFilingStatus)(dispatch);
+
+            sinon.assert.calledOnce(dispatch);
             sinon.assert.calledWithExactly(dispatch, expectedAction);
-
-        });
-
-    });
-
-    context('when updating the filing status', () => {
-
-        it('should update the filing status', () => {
-
-            const expectedFilingStatus = chance.string();
-
-            const expectedAction = {
-                filingStatus: expectedFilingStatus,
-                type: actions.UPDATE_FILING_STATUS
-            };
-
-            actionCreators.updateFilingStatus(expectedFilingStatus)(dispatch);
-
-            sinon.assert.calledWithExactly(dispatch, expectedAction);
-
-        });
-
-    });
-
-    context('when updating the year', () => {
-
-        let updateYearAction;
-
-        beforeEach(() => {
-
-            updateYearAction = actionCreators.updateYear(2016);
-
-        });
-
-        it('should have a type', () => {
-
-            expect(updateYearAction.type).string().equal(actions.UPDATE_YEAR);
-
-        });
-
-        it('should have a new salary', () => {
-
-            const expectedNewYear = 2016;
-
-            expect(updateYearAction.newYear).number().equal(expectedNewYear);
 
         });
 

@@ -5,19 +5,13 @@ import {expect} from 'code';
 import {shallow} from 'enzyme';
 import sinon from 'sinon';
 
+const chance = new Chance();
+const sandbox = sinon.sandbox.create();
+
 describe('Given the <TakeHome/> component', () => {
 
-    let chance,
-        sandbox,
-        takeHomeEl,
+    let takeHomeEl,
         testProps;
-
-    beforeEach(() => {
-
-        chance = new Chance();
-        sandbox = sinon.sandbox.create();
-
-    });
 
     beforeEach(() => {
 
@@ -26,9 +20,11 @@ describe('Given the <TakeHome/> component', () => {
                 updateSalary: sandbox.stub()
             },
             federalTax: chance.natural(),
-            filingstatus: chance.string(),
+            filingStatus: chance.string(),
             salary: chance.natural(),
             socialSecurity: chance.natural(),
+            takeHome: chance.natural(),
+            taxYear: chance.natural(),
             taxableIncome: chance.natural()
         });
 
@@ -42,35 +38,34 @@ describe('Given the <TakeHome/> component', () => {
 
     });
 
-    it('should have a <section/>', () => {
+    it('should be a <section/>', () => {
 
         expect(takeHomeEl.type()).string().equal('section');
 
     });
 
-    describe('and its salary input', () => {
+    describe('and its gross income section', () => {
 
-        let inputSalaryEl;
+        let grossIncomeEl;
 
         beforeEach(() => {
 
-            inputSalaryEl = takeHomeEl.childAt(0);
+            grossIncomeEl = takeHomeEl.find('.gross-income');
 
         });
 
-        it('should be an <input/>', () => {
+        it('should have a gross income input', () => {
+
+            const inputSalaryEl = grossIncomeEl.find('input');
 
             expect(inputSalaryEl.type()).string().equal('input');
-
-        });
-
-        it('should show `salary` as the `value`', () => {
-
             expect(inputSalaryEl.props().value).number().equal(testProps.salary);
 
         });
 
         it('should update the salary on change', () => {
+
+            const inputSalaryEl = grossIncomeEl.find('input');
 
             const expectedValue = chance.natural();
 
@@ -83,7 +78,7 @@ describe('Given the <TakeHome/> component', () => {
             inputSalaryEl.props().onChange(mockEvent);
 
             sinon.assert.calledOnce(testProps.actions.updateSalary);
-            sinon.assert.calledWithExactly(testProps.actions.updateSalary, expectedValue);
+            sinon.assert.calledWithExactly(testProps.actions.updateSalary, expectedValue, testProps.filingStatus);
 
         });
 
@@ -95,7 +90,7 @@ describe('Given the <TakeHome/> component', () => {
 
         beforeEach(() => {
 
-            taxableIncomeEl = takeHomeEl.childAt(1);
+            taxableIncomeEl = takeHomeEl.find('.taxable-income');
 
         });
 
@@ -121,7 +116,7 @@ describe('Given the <TakeHome/> component', () => {
 
         beforeEach(() => {
 
-            federalTaxEl = takeHomeEl.childAt(2);
+            federalTaxEl = takeHomeEl.find('.federal-tax');
 
         });
 
@@ -147,7 +142,7 @@ describe('Given the <TakeHome/> component', () => {
 
         beforeEach(() => {
 
-            socialSecurityEl = takeHomeEl.childAt(3);
+            socialSecurityEl = takeHomeEl.find('.social-security');
 
         });
 

@@ -5,18 +5,12 @@ import {fn as moment} from 'moment';
 import sinon from 'sinon';
 import t from 'tcomb';
 
+const chance = new Chance();
+const sandbox = sinon.sandbox.create();
+
 describe('Given the salary calculator state', () => {
 
-    let chance,
-        mockYear,
-        sandbox;
-
-    beforeEach(() => {
-
-        chance = new Chance();
-        sandbox = sinon.sandbox.create();
-
-    });
+    let mockYear;
 
     beforeEach(() => {
 
@@ -66,23 +60,23 @@ describe('Given the salary calculator state', () => {
             const expectedFilingStatusList = [
                 {
                     label: 'Head of Household',
-                    value: 'headOfHousehold'
+                    value: 'HEAD_OF_HOUSEHOLD'
                 },
                 {
                     label: 'Married (Joint)',
-                    value: 'marriedJoint'
+                    value: 'MARRIED_FILING_JOINTLY'
                 },
                 {
                     label: 'Married (Separate)',
-                    value: 'marriedSeparate'
+                    value: 'MARRIED_FILING_SEPARATELY'
                 },
                 {
                     label: 'Single',
-                    value: 'single'
+                    value: 'SINGLE'
                 }
             ];
 
-            expect(defaultState.filingStatusList).array().equal(expectedFilingStatusList);
+            expect(defaultState.filingStatuses).array().equal(expectedFilingStatusList);
 
         });
 
@@ -94,11 +88,11 @@ describe('Given the salary calculator state', () => {
 
         });
 
-        it('should have a filing status that defaults to `single`', () => {
+        it('should have a filing status that defaults to `SINGLE`', () => {
 
-            const expectedFilingStatus = 'single';
+            const expectedFilingStatus = 'SINGLE';
 
-            expect(defaultState.selectedFilingStatus).string().equal(expectedFilingStatus);
+            expect(defaultState.filingStatus).string().equal(expectedFilingStatus);
 
         });
 

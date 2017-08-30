@@ -1,21 +1,24 @@
-import React, {PropTypes} from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const handleFilingStatusChange = actions => event => {
+const handleFilingStatusChange = props => event => {
 
-    actions.updateFilingStatus(event.target.value);
+    const newFilingStatus = event.target.value;
+
+    props.actions.updateSalary(props.salary, newFilingStatus);
 
 };
 
 const FilingStatus = props =>
-    <section>
+    <section className='filing-status'>
         <select
             name='filing-status'
-            onChange={handleFilingStatusChange(props.actions)}
-            value={props.selectedFilingStatus}
+            onChange={handleFilingStatusChange(props)}
+            value={props.filingStatus}
         >
-            {props.filingStatusList && props.filingStatusList.map((status, index) =>
+            {props.filingStatuses.map(status =>
                 <option
-                    key={index}
+                    key={status.value}
                     value={status.value}
                 >
                     {status.label}
@@ -27,8 +30,9 @@ const FilingStatus = props =>
 FilingStatus.displayName = 'FilingStatus';
 FilingStatus.propTypes = {
     actions: PropTypes.object.isRequired,
-    filingStatusList: PropTypes.array.isRequired,
-    selectedFilingStatus: PropTypes.string.isRequired
+    filingStatus: PropTypes.string.isRequired,
+    filingStatuses: PropTypes.array.isRequired,
+    salary: PropTypes.number.isRequired
 };
 
 export default FilingStatus;

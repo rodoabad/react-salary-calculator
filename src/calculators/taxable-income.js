@@ -9,6 +9,7 @@ const getTaxableIncome = (salary, filingStatus, dependents) => {
     const newTaxableIncome = new BigNumber(salary)
         .minus(standardDeduction.get(filingStatus))
         .minus(personalExemption)
+        .round(2)
         .toNumber();
 
     return newTaxableIncome > 0 ?

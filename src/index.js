@@ -1,11 +1,12 @@
 import React, {PropTypes} from 'react';
-import {Provider} from 'react-redux';
+
+import {Provider as ReactReduxProvider} from 'react-redux';
 import StateConnector from './state-connector';
 
 const SalaryCalculator = props =>
-    <Provider store={props.store}>
+    <ReactReduxProvider store={props.store}>
         <StateConnector/>
-    </Provider>;
+    </ReactReduxProvider>;
 
 SalaryCalculator.displayName = 'SalaryCalculator';
 SalaryCalculator.propTypes = {

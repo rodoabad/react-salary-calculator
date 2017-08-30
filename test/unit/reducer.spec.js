@@ -4,16 +4,11 @@ import {expect} from 'code';
 import {getDefaultState} from '../../src/state';
 import takeHomeReducer from '../../src/reducer';
 
-describe('Given the salary calculator reducer', () => {
+const chance = new Chance();
 
-    let chance,
-        initialState;
+describe('Given the reducer for the salary calculator', () => {
 
-    beforeEach(() => {
-
-        chance = new Chance();
-
-    });
+    let initialState;
 
     beforeEach(() => {
 
@@ -47,52 +42,35 @@ describe('Given the salary calculator reducer', () => {
 
     context('when updating the salary', () => {
 
-        let expectedFederalTax,
-            expectedSalary,
-            expectedSocialSecurity,
-            expectedTaxableIncome,
-            nextState;
-
-        beforeEach(() => {
-
-            expectedFederalTax = chance.natural();
-            expectedSalary = chance.natural();
-            expectedSocialSecurity = chance.natural();
-            expectedTaxableIncome = chance.natural();
-
-            const updateSalaryAction = {
-                federalTax: expectedFederalTax,
-                salary: expectedSalary,
-                socialSecurity: expectedSocialSecurity,
-                taxableIncome: expectedTaxableIncome,
-                type: actions.UPDATE_SALARY
-            };
-
-            nextState = takeHomeReducer(initialState, updateSalaryAction);
-
-        });
-
-        it('should update the federal tax', () => {
-
-            expect(nextState.federalTax).number().equal(expectedFederalTax);
-
+        const mockSalaryUpdate = () => ({
+            federalTax: chance.natural(),
+            filingStatus: chance.string(),
+            salary: chance.natural(),
+            socialSecurity: chance.natural(),
+            takeHome: {
+                biWeekly: chance.natural(),
+                monthly: chance.natural(),
+                weekly: chance.natural(),
+                yearly: chance.natural()
+            },
+            taxableIncome: chance.natural()
         });
 
         it('should update the salary', () => {
 
-            expect(nextState.salary).number().equal(expectedSalary);
+            const updateSalaryAction = {
+                ...mockSalaryUpdate(),
+                type: actions.UPDATE_SALARY
+            };
 
-        });
+            const nextState = takeHomeReducer(initialState, updateSalaryAction);
 
-        it('should update the social security', () => {
-
-            expect(nextState.socialSecurity).number().equal(expectedSocialSecurity);
-
-        });
-
-        it('should update the taxable income', () => {
-
-            expect(nextState.taxableIncome).number().equal(expectedTaxableIncome);
+            expect(nextState.federalTax).number().equal(updateSalaryAction.federalTax);
+            expect(nextState.salary).number().equal(updateSalaryAction.salary);
+            expect(nextState.filingStatus).string().equal(updateSalaryAction.filingStatus);
+            expect(nextState.socialSecurity).number().equal(updateSalaryAction.socialSecurity);
+            expect(nextState.takeHome).object().equal(updateSalaryAction.takeHome);
+            expect(nextState.taxableIncome).number().equal(updateSalaryAction.taxableIncome);
 
         });
 

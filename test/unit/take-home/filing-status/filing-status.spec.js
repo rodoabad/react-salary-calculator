@@ -5,33 +5,28 @@ import {expect} from 'code';
 import {shallow} from 'enzyme';
 import sinon from 'sinon';
 
+const chance = new Chance();
+const sandbox = sinon.sandbox.create();
+
 describe('Given the <FilingStatus/> component', () => {
 
-    let chance,
-        filingStatusEl,
-        sandbox,
+    let filingStatusEl,
         testProps;
-
-    beforeEach(() => {
-
-        chance = new Chance();
-        sandbox = sinon.sandbox.create();
-
-    });
 
     beforeEach(() => {
 
         testProps = Object.freeze({
             actions: {
-                updateFilingStatus: sandbox.stub()
+                updateSalary: sandbox.stub()
             },
-            filingStatusList: [
+            filingStatus: chance.string(),
+            filingStatuses: [
                 {
                     label: chance.string(),
                     value: chance.string()
                 }
             ],
-            selectedFilingStatus: chance.string()
+            salary: chance.natural()
         });
 
         filingStatusEl = shallow(<FilingStatus {...testProps}/>);
@@ -47,44 +42,32 @@ describe('Given the <FilingStatus/> component', () => {
     it('should be a <section/>', () => {
 
         expect(filingStatusEl.type()).string().equal('section');
+        expect(filingStatusEl.props().className).string().equal('filing-status');
 
     });
 
-    describe('and its select options', () => {
+    describe('and its filing status dropdown', () => {
 
         let selectOptionsEl;
 
         beforeEach(() => {
 
-            selectOptionsEl = filingStatusEl.childAt(0);
+            selectOptionsEl = filingStatusEl.find('select');
 
         });
 
         it('should be a <select/>', () => {
 
-            expect(selectOptionsEl.type()).string().equal('select');
+            expect(selectOptionsEl.props().name).string().equal('filing-status');
+            expect(selectOptionsEl.props().value).string().equal(testProps.filingStatus);
 
         });
 
-        it('should have a name', () => {
-
-            const expectedName = 'filing-status';
-
-            expect(selectOptionsEl.props().name).string().equal(expectedName);
-
-        });
-
-        it('should use the `selectedFilingStatus` as the current value', () => {
-
-            expect(selectOptionsEl.props().value).string().equal(testProps.selectedFilingStatus);
-
-        });
-
-        it('should update the filing status if <select/> changes with the right value', () => {
+        it('should update the salary a new filing status has been selected', () => {
 
             const expectedValue = chance.string();
 
-            sinon.assert.notCalled(testProps.actions.updateFilingStatus);
+            sinon.assert.notCalled(testProps.actions.updateSalary);
 
             selectOptionsEl.simulate('change', {
                 target: {
@@ -92,19 +75,19 @@ describe('Given the <FilingStatus/> component', () => {
                 }
             });
 
-            sinon.assert.calledOnce(testProps.actions.updateFilingStatus);
-            sinon.assert.calledWithExactly(testProps.actions.updateFilingStatus, expectedValue);
+            sinon.assert.calledOnce(testProps.actions.updateSalary);
+            sinon.assert.calledWithExactly(testProps.actions.updateSalary, testProps.salary, expectedValue);
 
         });
 
-        it('should have <option/> that display filing statuses', () => {
+        it('should have filing status options', () => {
 
             selectOptionsEl.children().forEach((option, index) => {
 
                 expect(option.type()).string().equal('option');
-                expect(option.key()).string().equal(index.toString());
-                expect(option.props().value).string().equal(testProps.filingStatusList[index].value);
-                expect(option.text()).string().equal(testProps.filingStatusList[index].label);
+                expect(option.key()).string().equal(testProps.filingStatuses[index].value);
+                expect(option.props().value).string().equal(testProps.filingStatuses[index].value);
+                expect(option.text()).string().equal(testProps.filingStatuses[index].label);
 
             });
 

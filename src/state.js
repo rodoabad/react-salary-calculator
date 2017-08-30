@@ -3,18 +3,19 @@ import t from 'tcomb';
 
 const SalaryCalculator = t.struct({
     federalTax: t.Number,
-    filingStatusList: t.list(t.struct({
+    filingStatus: t.String,
+    filingStatuses: t.list(t.struct({
         label: t.String,
         value: t.String
     }), 'FilingStatusList'),
     salary: t.Number,
-    selectedFilingStatus: t.enums({
-        headOfHousehold: 'HeadOfHousehold',
-        marriedJoint: 'MarriedJoint',
-        marriedSeparate: 'MarriedSeparate',
-        single: 'Single'
-    }, 'FilingStatus'),
     socialSecurity: t.Number,
+    takeHome: t.struct({
+        biWeekly: t.Number,
+        monthly: t.Number,
+        weekly: t.Number,
+        yearly: t.Number
+    }),
     taxYear: t.Number,
     taxableIncome: t.Number
 }, {
@@ -25,27 +26,33 @@ const SalaryCalculator = t.struct({
 export const getDefaultState = () =>
     new SalaryCalculator({
         federalTax: 0,
-        filingStatusList: [
+        filingStatus: 'SINGLE',
+        filingStatuses: [
             {
                 label: 'Head of Household',
-                value: 'headOfHousehold'
+                value: 'HEAD_OF_HOUSEHOLD'
             },
             {
                 label: 'Married (Joint)',
-                value: 'marriedJoint'
+                value: 'MARRIED_FILING_JOINTLY'
             },
             {
                 label: 'Married (Separate)',
-                value: 'marriedSeparate'
+                value: 'MARRIED_FILING_SEPARATELY'
             },
             {
                 label: 'Single',
-                value: 'single'
+                value: 'SINGLE'
             }
         ],
         salary: 0,
-        selectedFilingStatus: 'single',
         socialSecurity: 0,
+        takeHome: {
+            biWeekly: 0,
+            monthly: 0,
+            weekly: 0,
+            yearly: 0
+        },
         taxYear: moment().year(),
         taxableIncome: 0
     });

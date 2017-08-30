@@ -3,13 +3,14 @@ import {additionalMedicareTax} from '../constants/medicare';
 
 const getOldAgeSurvivorsAndDisabilityInsurance = grossIncome => {
 
-    const INCOME_LIMIT = 118500;
-    const MAXIMUM_OASDI = 7347;
+    const INCOME_LIMIT = 127200;
+    const MAXIMUM_OASDI = 7886.4;
     const OASDI_MULTIPLIER = 0.062;
 
     return grossIncome < INCOME_LIMIT ?
            new BigNumber(grossIncome)
-               .times(OASDI_MULTIPLIER).toNumber() :
+               .times(OASDI_MULTIPLIER)
+               .toNumber() :
            MAXIMUM_OASDI;
 
 };

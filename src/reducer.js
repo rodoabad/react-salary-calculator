@@ -5,8 +5,10 @@ const updateSalary = (state, action) =>
     SalaryCalculator.update(state, {
         $merge: {
             federalTax: action.federalTax,
+            filingStatus: action.filingStatus,
             salary: action.salary,
             socialSecurity: action.socialSecurity,
+            takeHome: action.takeHome,
             taxableIncome: action.taxableIncome
         }
     });
