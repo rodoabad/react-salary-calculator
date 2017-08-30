@@ -11,7 +11,7 @@ describe('Given the federal tax calculator', () => {
 
         const actualFederalTax = getFederalTax(taxableIncome, 'MARRIED_FILING_JOINTLY');
 
-        expect(actualFederalTax).number().equal(expectedFederalTax);
+        expect(actualFederalTax).equal(expectedFederalTax);
 
     });
 
@@ -23,7 +23,7 @@ describe('Given the federal tax calculator', () => {
 
         const actualFederalTax = getFederalTax(taxableIncome, 'SINGLE');
 
-        expect(actualFederalTax).number().equal(expectedFederalTax);
+        expect(actualFederalTax).equal(expectedFederalTax);
 
     });
 

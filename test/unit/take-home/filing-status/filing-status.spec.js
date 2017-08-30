@@ -41,8 +41,8 @@ describe('Given the <FilingStatus/> component', () => {
 
     it('should be a <section/>', () => {
 
-        expect(filingStatusEl.type()).string().equal('section');
-        expect(filingStatusEl.props().className).string().equal('filing-status');
+        expect(filingStatusEl.type()).equal('section');
+        expect(filingStatusEl.props().className).equal('filing-status');
 
     });
 
@@ -58,8 +58,8 @@ describe('Given the <FilingStatus/> component', () => {
 
         it('should be a <select/>', () => {
 
-            expect(selectOptionsEl.props().name).string().equal('filing-status');
-            expect(selectOptionsEl.props().value).string().equal(testProps.filingStatus);
+            expect(selectOptionsEl.props().name).equal('filing-status');
+            expect(selectOptionsEl.props().value).equal(testProps.filingStatus);
 
         });
 
@@ -84,10 +84,10 @@ describe('Given the <FilingStatus/> component', () => {
 
             selectOptionsEl.children().forEach((option, index) => {
 
-                expect(option.type()).string().equal('option');
-                expect(option.key()).string().equal(testProps.filingStatuses[index].value);
-                expect(option.props().value).string().equal(testProps.filingStatuses[index].value);
-                expect(option.text()).string().equal(testProps.filingStatuses[index].label);
+                expect(option.type()).equal('option');
+                expect(option.key()).equal(testProps.filingStatuses[index].value);
+                expect(option.props().value).equal(testProps.filingStatuses[index].value);
+                expect(option.text()).equal(testProps.filingStatuses[index].label);
 
             });
 

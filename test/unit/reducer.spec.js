@@ -22,7 +22,7 @@ describe('Given the reducer for the salary calculator', () => {
 
             const nextState = takeHomeReducer(undefined, {}); // eslint-disable-line no-undefined
 
-            expect(nextState).object().equal(initialState);
+            expect(nextState).equal(initialState);
 
         });
 
@@ -34,7 +34,7 @@ describe('Given the reducer for the salary calculator', () => {
 
             const nextState = takeHomeReducer(undefined, invalidAction); // eslint-disable-line no-undefined
 
-            expect(nextState).object().equal(initialState);
+            expect(nextState).equal(initialState);
 
         });
 
@@ -65,12 +65,12 @@ describe('Given the reducer for the salary calculator', () => {
 
             const nextState = takeHomeReducer(initialState, updateSalaryAction);
 
-            expect(nextState.federalTax).number().equal(updateSalaryAction.federalTax);
-            expect(nextState.salary).number().equal(updateSalaryAction.salary);
-            expect(nextState.filingStatus).string().equal(updateSalaryAction.filingStatus);
-            expect(nextState.socialSecurity).number().equal(updateSalaryAction.socialSecurity);
-            expect(nextState.takeHome).object().equal(updateSalaryAction.takeHome);
-            expect(nextState.taxableIncome).number().equal(updateSalaryAction.taxableIncome);
+            expect(nextState.federalTax).equal(updateSalaryAction.federalTax);
+            expect(nextState.salary).equal(updateSalaryAction.salary);
+            expect(nextState.filingStatus).equal(updateSalaryAction.filingStatus);
+            expect(nextState.socialSecurity).equal(updateSalaryAction.socialSecurity);
+            expect(nextState.takeHome).equal(updateSalaryAction.takeHome);
+            expect(nextState.taxableIncome).equal(updateSalaryAction.taxableIncome);
 
         });
 

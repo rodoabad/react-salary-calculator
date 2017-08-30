@@ -41,7 +41,7 @@ describe('Given the store factory', () => {
 
             sinon.assert.calledOnce(storeConfiguratorStub);
 
-            expect(createdStore).object().equal(expectedCreatedStore);
+            expect(createdStore).equal(expectedCreatedStore);
 
         });
 
@@ -55,7 +55,7 @@ describe('Given the store factory', () => {
 
             sinon.assert.calledOnce(storeConfiguratorStub);
 
-            expect(returnedStore).object().equal(expectedCreatedStore);
+            expect(returnedStore).equal(expectedCreatedStore);
 
         });
 

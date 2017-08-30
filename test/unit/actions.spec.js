@@ -5,7 +5,7 @@ describe('Given the salary calculator actions', () => {
 
     it('should have an action for updating the salary', () => {
 
-        expect(actions.UPDATE_SALARY).string().equal('UPDATE_SALARY');
+        expect(actions.UPDATE_SALARY).equal('UPDATE_SALARY');
 
     });
 

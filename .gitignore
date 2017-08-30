@@ -2,6 +2,7 @@
 .bundle
 .eslintcache
 .idea
+.nyc_output
 npm-debug.log
 coverage
 dist

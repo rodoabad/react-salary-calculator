@@ -8,7 +8,7 @@ import sinon from 'sinon';
 const chance = new Chance();
 const sandbox = sinon.sandbox.create();
 
-describe('Given the <TakeHome/> component', () => {
+describe.only('Given the <TakeHome/> component', () => {
 
     let takeHomeEl,
         testProps;
@@ -23,7 +23,7 @@ describe('Given the <TakeHome/> component', () => {
             filingStatus: chance.string(),
             salary: chance.natural(),
             socialSecurity: chance.natural(),
-            takeHome: chance.natural(),
+            takeHome: {},
             taxYear: chance.natural(),
             taxableIncome: chance.natural()
         });
@@ -40,7 +40,7 @@ describe('Given the <TakeHome/> component', () => {
 
     it('should be a <section/>', () => {
 
-        expect(takeHomeEl.type()).string().equal('section');
+        expect(takeHomeEl.type()).equal('section');
 
     });
 
@@ -58,8 +58,8 @@ describe('Given the <TakeHome/> component', () => {
 
             const inputSalaryEl = grossIncomeEl.find('input');
 
-            expect(inputSalaryEl.type()).string().equal('input');
-            expect(inputSalaryEl.props().value).number().equal(testProps.salary);
+            expect(inputSalaryEl.type()).equal('input');
+            expect(inputSalaryEl.props().value).equal(testProps.salary);
 
         });
 
@@ -96,7 +96,7 @@ describe('Given the <TakeHome/> component', () => {
 
         it('should be a <section/>', () => {
 
-            expect(taxableIncomeEl.type()).string().equal('section');
+            expect(taxableIncomeEl.type()).equal('section');
 
         });
 
@@ -104,7 +104,7 @@ describe('Given the <TakeHome/> component', () => {
 
             const expectedText = `Taxable Income: $${testProps.taxableIncome}`;
 
-            expect(taxableIncomeEl.text()).string().equal(expectedText);
+            expect(taxableIncomeEl.text()).equal(expectedText);
 
         });
 
@@ -122,7 +122,7 @@ describe('Given the <TakeHome/> component', () => {
 
         it('should be a <section/>', () => {
 
-            expect(federalTaxEl.type()).string().equal('section');
+            expect(federalTaxEl.type()).equal('section');
 
         });
 
@@ -130,7 +130,7 @@ describe('Given the <TakeHome/> component', () => {
 
             const expectedText = `Federal Tax: $${testProps.federalTax}`;
 
-            expect(federalTaxEl.text()).string().equal(expectedText);
+            expect(federalTaxEl.text()).equal(expectedText);
 
         });
 
@@ -148,7 +148,7 @@ describe('Given the <TakeHome/> component', () => {
 
         it('should be a <section/>', () => {
 
-            expect(socialSecurityEl.type()).string().equal('section');
+            expect(socialSecurityEl.type()).equal('section');
 
         });
 
@@ -156,7 +156,7 @@ describe('Given the <TakeHome/> component', () => {
 
             const expectedText = `Social Security: $${testProps.socialSecurity}`;
 
-            expect(socialSecurityEl.text()).string().equal(expectedText);
+            expect(socialSecurityEl.text()).equal(expectedText);
 
         });
 

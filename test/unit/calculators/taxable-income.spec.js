@@ -13,7 +13,7 @@ describe('Given the taxable income calculator', () => {
 
             const expectedTaxableIncome = 86600;
 
-            expect(getTaxableIncome(salaryRange, filingStatus, dependents)).number().equal(expectedTaxableIncome);
+            expect(getTaxableIncome(salaryRange, filingStatus, dependents)).equal(expectedTaxableIncome);
 
         });
 
@@ -25,7 +25,7 @@ describe('Given the taxable income calculator', () => {
 
             const expectedTaxableIncome = 79200;
 
-            expect(getTaxableIncome(salaryRange, filingStatus, dependents)).number().equal(expectedTaxableIncome);
+            expect(getTaxableIncome(salaryRange, filingStatus, dependents)).equal(expectedTaxableIncome);
 
         });
 
@@ -37,7 +37,7 @@ describe('Given the taxable income calculator', () => {
 
             const expectedTaxableIncome = 89600;
 
-            expect(getTaxableIncome(salaryRange, filingStatus, dependents)).number().equal(expectedTaxableIncome);
+            expect(getTaxableIncome(salaryRange, filingStatus, dependents)).equal(expectedTaxableIncome);
 
         });
 
@@ -53,7 +53,7 @@ describe('Given the taxable income calculator', () => {
 
             const expectedTaxableIncome = 287005;
 
-            expect(getTaxableIncome(salaryRange, filingStatus, dependents)).number().equal(expectedTaxableIncome);
+            expect(getTaxableIncome(salaryRange, filingStatus, dependents)).equal(expectedTaxableIncome);
 
         });
 
@@ -65,7 +65,7 @@ describe('Given the taxable income calculator', () => {
 
             const expectedTaxableIncome = 279200;
 
-            expect(getTaxableIncome(salaryRange, filingStatus, dependents)).number().equal(expectedTaxableIncome);
+            expect(getTaxableIncome(salaryRange, filingStatus, dependents)).equal(expectedTaxableIncome);
 
         });
 
@@ -77,7 +77,7 @@ describe('Given the taxable income calculator', () => {
 
             const expectedTaxableIncome = 290896;
 
-            expect(getTaxableIncome(salaryRange, filingStatus, dependents)).number().equal(expectedTaxableIncome);
+            expect(getTaxableIncome(salaryRange, filingStatus, dependents)).equal(expectedTaxableIncome);
 
         });
 

@@ -28,7 +28,7 @@ describe('Given the <StateConnector/> component', () => {
 
     it('should be connecting <TakeHome/>', () => {
 
-        expect(stateConnectorEl.type()).function().equal(TakeHome);
+        expect(stateConnectorEl.type()).equal(TakeHome);
 
     });
 

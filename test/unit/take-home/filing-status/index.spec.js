@@ -28,7 +28,7 @@ describe('Given the state connector for <FilingStatus/>', () => {
 
     it('should be connecting <FilingStatus/>', () => {
 
-        expect(stateConnectorEl.type()).function().equal(FilingStatus);
+        expect(stateConnectorEl.type()).equal(FilingStatus);
 
     });
 

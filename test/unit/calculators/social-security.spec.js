@@ -10,7 +10,7 @@ describe('Given the social security calculator', () => {
 
         const actualSocialSecurityTax = getSocialSecurity(grossIncome, 'SINGLE');
 
-        expect(actualSocialSecurityTax).number().equal(expectedSocialSecurityTax);
+        expect(actualSocialSecurityTax).equal(expectedSocialSecurityTax);
 
     });
 
@@ -21,7 +21,7 @@ describe('Given the social security calculator', () => {
 
         const actualSocialSecurityTax = getSocialSecurity(grossIncome, 'SINGLE');
 
-        expect(actualSocialSecurityTax).number().equal(expectedSocialSecurityTax);
+        expect(actualSocialSecurityTax).equal(expectedSocialSecurityTax);
 
     });
 
@@ -32,7 +32,7 @@ describe('Given the social security calculator', () => {
 
         const actualSocialSecurityTax = getSocialSecurity(grossIncome, 'SINGLE');
 
-        expect(actualSocialSecurityTax).number().equal(expectedSocialSecurityTax);
+        expect(actualSocialSecurityTax).equal(expectedSocialSecurityTax);
 
     });
 

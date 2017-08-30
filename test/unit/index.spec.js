@@ -1,22 +1,20 @@
-import {Provider} from 'react-redux';
+import {IntlProvider} from 'react-intl';
 import React from 'react';
+import {Provider as ReactReduxProvider} from 'react-redux';
 import SalaryCalculator from '../../src/';
+import StateConnector from '../../src/state-connector';
 import TakeHome from '../../src/take-home';
 import {expect} from 'code';
+import localizedMessages from '../../src/i18n/en.json';
 import {shallow} from 'enzyme';
 import sinon from 'sinon';
+
+const sandbox = sinon.sandbox.create();
 
 describe('Given the <SalaryCalculator/> component', () => {
 
     let salaryCalculatorEl,
-        sandbox,
         testProps;
-
-    beforeEach(() => {
-
-        sandbox = sinon.sandbox.create();
-
-    });
 
     beforeEach(() => {
 
@@ -38,27 +36,28 @@ describe('Given the <SalaryCalculator/> component', () => {
 
     });
 
-    it('should be using <Provider/>', () => {
+    it('should have localization', () => {
 
-        expect(salaryCalculatorEl.type()).function().equal(Provider);
+        const intlProviderEl = salaryCalculatorEl.find(IntlProvider);
 
-    });
-
-    it('should have `store`', () => {
-
-        expect(salaryCalculatorEl.props().store).equal(testProps.store);
+        expect(intlProviderEl.props().locale).equal('en');
+        expect(intlProviderEl.props().messages).equal(localizedMessages);
 
     });
 
-    describe('and its <StateConnector/>', () => {
+    it('should have a state manager', () => {
 
-        it('should be using wrapping <TakeHome/>', () => {
+        const reactReduxProvider = salaryCalculatorEl.find(ReactReduxProvider);
 
-            const takeHomeEl = salaryCalculatorEl.childAt(0);
+        expect(reactReduxProvider.props().store).equal(testProps.store);
 
-            expect(takeHomeEl.type().WrappedComponent).function().equal(TakeHome);
+    });
 
-        });
+    it('should have <TakeHome/>', () => {
+
+        const takeHomeEl = salaryCalculatorEl.find(StateConnector);
+
+        expect(takeHomeEl.type().WrappedComponent).equal(TakeHome);
 
     });
 

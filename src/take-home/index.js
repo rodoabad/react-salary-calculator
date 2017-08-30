@@ -1,5 +1,6 @@
-import React, {PropTypes} from 'react';
 import FilingStatus from './filing-status';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const handleSalaryChange = props => event => {
 

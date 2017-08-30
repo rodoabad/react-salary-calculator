@@ -5,12 +5,13 @@ import * as storeConfigurator from '../../src/store-configurator';
 import {expect} from 'code';
 import sinon from 'sinon';
 
+const sandbox = sinon.sandbox.create();
+
 describe('Given the store configurator', () => {
 
     let createdStore,
         expectedReducers,
         middlewareStoreCreatorStub,
-        sandbox,
         storeConstructorStub,
         storeInstanceStub;
 
@@ -27,8 +28,6 @@ describe('Given the store configurator', () => {
     beforeEach(() => {
 
         expectedReducers = {};
-
-        sandbox = sinon.sandbox.create();
 
         sandbox.stub(reduxThunk, 'default');
         sandbox.stub(reduxLogger, 'default');
@@ -68,7 +67,7 @@ describe('Given the store configurator', () => {
 
     it('should return the store instance', () => {
 
-        expect(createdStore).function().equal(storeInstanceStub);
+        expect(createdStore).equal(storeInstanceStub);
 
     });
 

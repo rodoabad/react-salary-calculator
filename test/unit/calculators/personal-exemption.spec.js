@@ -13,7 +13,7 @@ describe('Given the personal exemption calculator', () => {
 
         const actualPersonalExemption = getPersonalExemption(grossIncome, filingStatus, dependents);
 
-        expect(actualPersonalExemption).number().equal(expectedPersonalExemption);
+        expect(actualPersonalExemption).equal(expectedPersonalExemption);
 
     });
 
@@ -27,7 +27,7 @@ describe('Given the personal exemption calculator', () => {
 
         const actualPersonalExemption = getPersonalExemption(grossIncome, filingStatus, dependents);
 
-        expect(actualPersonalExemption).number().equal(expectedPersonalExemption);
+        expect(actualPersonalExemption).equal(expectedPersonalExemption);
 
     });
 

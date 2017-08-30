@@ -27,7 +27,7 @@ describe('Given the salary calculator state', () => {
 
     it('should have a type name', () => {
 
-        expect(t.getTypeName(TakeHome)).string().equal('SalaryCalculator');
+        expect(t.getTypeName(TakeHome)).equal('SalaryCalculator');
 
     });
 
@@ -51,7 +51,7 @@ describe('Given the salary calculator state', () => {
 
             const expectedFederalTax = 0;
 
-            expect(defaultState.federalTax).number().equal(expectedFederalTax);
+            expect(defaultState.federalTax).equal(expectedFederalTax);
 
         });
 
@@ -76,7 +76,7 @@ describe('Given the salary calculator state', () => {
                 }
             ];
 
-            expect(defaultState.filingStatuses).array().equal(expectedFilingStatusList);
+            expect(defaultState.filingStatuses).equal(expectedFilingStatusList);
 
         });
 
@@ -84,7 +84,7 @@ describe('Given the salary calculator state', () => {
 
             const expectedSalary = 0;
 
-            expect(defaultState.salary).number().equal(expectedSalary);
+            expect(defaultState.salary).equal(expectedSalary);
 
         });
 
@@ -92,13 +92,13 @@ describe('Given the salary calculator state', () => {
 
             const expectedFilingStatus = 'SINGLE';
 
-            expect(defaultState.filingStatus).string().equal(expectedFilingStatus);
+            expect(defaultState.filingStatus).equal(expectedFilingStatus);
 
         });
 
         it('should have tax year that defaults to the current year', () => {
 
-            expect(defaultState.taxYear).number().equal(mockYear);
+            expect(defaultState.taxYear).equal(mockYear);
 
         });
 
@@ -106,7 +106,7 @@ describe('Given the salary calculator state', () => {
 
             const expectedTaxableIncome = 0;
 
-            expect(defaultState.taxableIncome).number().equal(expectedTaxableIncome);
+            expect(defaultState.taxableIncome).equal(expectedTaxableIncome);
 
         });
 
