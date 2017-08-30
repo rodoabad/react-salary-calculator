@@ -8,7 +8,7 @@ import sinon from 'sinon';
 const chance = new Chance();
 const sandbox = sinon.sandbox.create();
 
-describe.only('Given the <TakeHome/> component', () => {
+describe('Given the <TakeHome/> component', () => {
 
     let takeHomeEl,
         testProps;
