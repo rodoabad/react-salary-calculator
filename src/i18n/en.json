@@ -1,3 +1,17 @@
 {
-    "HELLO": "Hello world!"
+  "FEDERAL_TAX": "Federal Tax: ",
+  "FILING_STATUS": "Filing Status: ",
+  "HEAD_OF_HOUSEHOLD": "Head of Household",
+  "MARRIED_FILING_JOINTLY": "Married (Joint)",
+  "MARRIED_FILING_SEPARATELY": "Married (Separate)",
+  "NUMBER_OF_DEPENDENTS": "Number of Dependents: ",
+  "SALARY": "Salary: ",
+  "SINGLE": "Single",
+  "SOCIAL_SECURITY": "Social Security: ",
+  "TAX_YEAR": "Tax Year: {taxYear}",
+  "TAXABLE_INCOME": "Taxable Income: ",
+  "TAKE_HOME_BI_WEEKLY": "Take Home (Bi-Weekly): ",
+  "TAKE_HOME_MONTHLY": "Take Home (Monthly): ",
+  "TAKE_HOME_WEEKLY": "Take Home (Weekly): ",
+  "TAKE_HOME_YEARLY": "Take Home (Yearly): "
 }

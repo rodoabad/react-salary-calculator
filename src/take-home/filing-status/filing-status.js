@@ -1,37 +1,30 @@
+import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const handleFilingStatusChange = props => event => {
-
-    const newFilingStatus = event.target.value;
-
-    props.actions.updateSalary(props.salary, newFilingStatus);
-
-};
-
 const FilingStatus = props =>
     <section className='filing-status'>
+        <FormattedMessage id='FILING_STATUS'/>
         <select
             name='filing-status'
-            onChange={handleFilingStatusChange(props)}
+            onChange={props.handleFilingStatusChange}
             value={props.filingStatus}
         >
             {props.filingStatuses.map(status =>
-                <option
+                <FormattedMessage
+                    id={status.value}
                     key={status.value}
-                    value={status.value}
                 >
-                    {status.label}
-                </option>
+                    {message => <option value={status.value}>{message}</option>}
+                </FormattedMessage>
             )}
         </select>
     </section>;
 
-FilingStatus.displayName = 'FilingStatus';
 FilingStatus.propTypes = {
-    actions: PropTypes.object.isRequired,
     filingStatus: PropTypes.string.isRequired,
     filingStatuses: PropTypes.array.isRequired,
+    handleFilingStatusChange: PropTypes.func.isRequired,
     salary: PropTypes.number.isRequired
 };
 

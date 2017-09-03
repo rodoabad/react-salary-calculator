@@ -2,20 +2,19 @@ import moment from 'moment';
 import t from 'tcomb';
 
 const SalaryCalculator = t.struct({
+    dependents: t.Number,
     federalTax: t.Number,
     filingStatus: t.String,
     filingStatuses: t.list(t.struct({
         label: t.String,
         value: t.String
     }), 'FilingStatusList'),
-    salary: t.Number,
+    salary: t.maybe(t.Number),
     socialSecurity: t.Number,
-    takeHome: t.struct({
-        biWeekly: t.Number,
-        monthly: t.Number,
-        weekly: t.Number,
-        yearly: t.Number
-    }),
+    takeHomeBiWeekly: t.Number,
+    takeHomeMonthly: t.Number,
+    takeHomeWeekly: t.Number,
+    takeHomeYearly: t.Number,
     taxYear: t.Number,
     taxableIncome: t.Number
 }, {
@@ -25,6 +24,7 @@ const SalaryCalculator = t.struct({
 
 export const getDefaultState = () =>
     new SalaryCalculator({
+        dependents: 0,
         federalTax: 0,
         filingStatus: 'SINGLE',
         filingStatuses: [
@@ -47,12 +47,10 @@ export const getDefaultState = () =>
         ],
         salary: 0,
         socialSecurity: 0,
-        takeHome: {
-            biWeekly: 0,
-            monthly: 0,
-            weekly: 0,
-            yearly: 0
-        },
+        takeHomeBiWeekly: 0,
+        takeHomeMonthly: 0,
+        takeHomeWeekly: 0,
+        takeHomeYearly: 0,
         taxYear: moment().year(),
         taxableIncome: 0
     });

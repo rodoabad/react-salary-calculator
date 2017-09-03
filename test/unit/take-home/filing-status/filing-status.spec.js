@@ -1,24 +1,23 @@
 import Chance from 'chance';
 import FilingStatus from '../../../../src/take-home/filing-status/filing-status';
+import {FormattedMessage} from 'react-intl';
 import React from 'react';
 import {expect} from 'code';
+import {mockEventValue} from '../../../utils/mock-event-value';
 import {shallow} from 'enzyme';
 import sinon from 'sinon';
 
-const chance = new Chance();
-const sandbox = sinon.sandbox.create();
-
 describe('Given the <FilingStatus/> component', () => {
 
-    let filingStatusEl,
-        testProps;
+    const chance = new Chance();
+    const sandbox = sinon.sandbox.create();
+
+    let component,
+        mockProps;
 
     beforeEach(() => {
 
-        testProps = Object.freeze({
-            actions: {
-                updateSalary: sandbox.stub()
-            },
+        mockProps = Object.freeze({
             filingStatus: chance.string(),
             filingStatuses: [
                 {
@@ -26,68 +25,64 @@ describe('Given the <FilingStatus/> component', () => {
                     value: chance.string()
                 }
             ],
+            handleFilingStatusChange: sandbox.stub(),
             salary: chance.natural()
         });
 
-        filingStatusEl = shallow(<FilingStatus {...testProps}/>);
+        component = shallow(<FilingStatus {...mockProps}/>);
 
     });
 
-    afterEach(() => {
+    afterEach(() => sandbox.restore());
 
-        sandbox.restore();
+    it('should be a section', () => {
 
-    });
-
-    it('should be a <section/>', () => {
-
-        expect(filingStatusEl.type()).equal('section');
-        expect(filingStatusEl.props().className).equal('filing-status');
+        expect(component.type()).equal('section');
+        expect(component.props().className).equal('filing-status');
 
     });
 
-    describe('and its filing status dropdown', () => {
+    it('should have a label', () => {
 
-        let selectOptionsEl;
+        const label = component.children(FormattedMessage);
+
+        expect(label.props().id).equal('FILING_STATUS');
+
+    });
+
+    describe('and its filing status drop down', () => {
+
+        let filingStatuses;
 
         beforeEach(() => {
 
-            selectOptionsEl = filingStatusEl.find('select');
+            filingStatuses = component.find('select');
 
         });
 
-        it('should be a <select/>', () => {
+        it('should have a drop down to change the filing status', () => {
 
-            expect(selectOptionsEl.props().name).equal('filing-status');
-            expect(selectOptionsEl.props().value).equal(testProps.filingStatus);
+            const expectedNewFilingStatus = chance.string();
 
-        });
+            expect(filingStatuses.props().name).equal('filing-status');
+            expect(filingStatuses.props().value).equal(mockProps.filingStatus);
 
-        it('should update the salary a new filing status has been selected', () => {
+            filingStatuses.simulate('change', mockEventValue(expectedNewFilingStatus));
 
-            const expectedValue = chance.string();
-
-            sinon.assert.notCalled(testProps.actions.updateSalary);
-
-            selectOptionsEl.simulate('change', {
-                target: {
-                    value: expectedValue
-                }
-            });
-
-            sinon.assert.calledOnce(testProps.actions.updateSalary);
-            sinon.assert.calledWithExactly(testProps.actions.updateSalary, testProps.salary, expectedValue);
+            sinon.assert.calledOnce(mockProps.handleFilingStatusChange);
 
         });
 
         it('should have filing status options', () => {
 
-            selectOptionsEl.children().forEach((option, index) => {
+            filingStatuses.children().forEach((option, index) => {
 
-                expect(option.type()).equal('option');
-                expect(option.key()).equal(testProps.filingStatuses[index].value);
-                expect(option.props().value).equal(testProps.filingStatuses[index].value);
-                expect(option.text()).equal(testProps.filingStatuses[index].label);
+                const mockMessage = chance.string();
+
+                expect(option.type()).equal(FormattedMessage);
+                expect(option.key()).equal(mockProps.filingStatuses[index].value);
+                expect(option.props().id).equal(mockProps.filingStatuses[index].value);
+                expect(option.props().children(mockMessage).props.value).equal(mockProps.filingStatuses[index].value);
 
             });
 

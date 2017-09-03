@@ -3,6 +3,22 @@ import {getTaxableIncome} from '../../../src/calculators/taxable-income';
 
 describe('Given the taxable income calculator', () => {
 
+    context('and below zero', () => {
+
+        it('should return zero', () => {
+
+            const filingStatus = 'SINGLE';
+            const dependents = 0;
+            const salaryRange = 1000;
+
+            const expectedTaxableIncome = 0;
+
+            expect(getTaxableIncome(salaryRange, filingStatus, dependents)).equal(expectedTaxableIncome);
+
+        });
+
+    });
+
     context('and under the threshold', () => {
 
         it('should return the correct taxable income', () => {

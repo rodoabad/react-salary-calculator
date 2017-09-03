@@ -2,7 +2,6 @@ import {IntlProvider} from 'react-intl';
 import React from 'react';
 import {Provider as ReactReduxProvider} from 'react-redux';
 import SalaryCalculator from '../../src/';
-import StateConnector from '../../src/state-connector';
 import TakeHome from '../../src/take-home';
 import {expect} from 'code';
 import localizedMessages from '../../src/i18n/en.json';
@@ -13,20 +12,20 @@ const sandbox = sinon.sandbox.create();
 
 describe('Given the <SalaryCalculator/> component', () => {
 
-    let salaryCalculatorEl,
-        testProps;
+    let component,
+        mockProps;
 
     beforeEach(() => {
 
-        testProps = Object.freeze({
+        mockProps = {
             store: {
                 dispatch: sandbox.stub(),
                 getState: sandbox.stub(),
                 subscribe: sandbox.stub()
             }
-        });
+        };
 
-        salaryCalculatorEl = shallow(<SalaryCalculator {...testProps}/>);
+        component = shallow(<SalaryCalculator {...mockProps}/>);
 
     });
 
@@ -38,7 +37,7 @@ describe('Given the <SalaryCalculator/> component', () => {
 
     it('should have localization', () => {
 
-        const intlProviderEl = salaryCalculatorEl.find(IntlProvider);
+        const intlProviderEl = component.find(IntlProvider);
 
         expect(intlProviderEl.props().locale).equal('en');
         expect(intlProviderEl.props().messages).equal(localizedMessages);
@@ -47,17 +46,17 @@ describe('Given the <SalaryCalculator/> component', () => {
 
     it('should have a state manager', () => {
 
-        const reactReduxProvider = salaryCalculatorEl.find(ReactReduxProvider);
+        const reactReduxProvider = component.find(ReactReduxProvider);
 
-        expect(reactReduxProvider.props().store).equal(testProps.store);
+        expect(reactReduxProvider.props().store).equal(mockProps.store);
 
     });
 
     it('should have <TakeHome/>', () => {
 
-        const takeHomeEl = salaryCalculatorEl.find(StateConnector);
+        const takeHomeEl = component.find(TakeHome);
 
-        expect(takeHomeEl.type().WrappedComponent).equal(TakeHome);
+        expect(takeHomeEl.length).equal(1);
 
     });
 

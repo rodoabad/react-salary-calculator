@@ -2,7 +2,7 @@ import {IntlProvider} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {Provider as ReactReduxProvider} from 'react-redux';
-import StateConnector from './state-connector';
+import TakeHome from './take-home';
 
 import en from './i18n/en.json';
 
@@ -12,11 +12,10 @@ const SalaryCalculator = props =>
         messages={en}
     >
         <ReactReduxProvider store={props.store}>
-            <StateConnector/>
+            <TakeHome/>
         </ReactReduxProvider>
     </IntlProvider>;
 
-SalaryCalculator.displayName = 'SalaryCalculator';
 SalaryCalculator.propTypes = {
     store: PropTypes.object.isRequired
 };

@@ -1,44 +1,64 @@
 import * as actionCreators from '../../../../src/action-creators';
+import {mockEventValue, mockReduxStore} from '../../../utils';
+import Chance from 'chance';
 import FilingStatus from '../../../../src/take-home/filing-status/filing-status';
 import React from 'react';
-import StateConnector from '../../../../src/take-home/filing-status';
+import ReduxConnector from '../../../../src/take-home/filing-status';
 import {expect} from 'code';
-import {getDefaultState} from '../../../../src/state';
-import {mockReduxStore} from '../../../utils/mock-redux-store';
 import {shallow} from 'enzyme';
+import sinon from 'sinon';
 
-describe('Given the state connector for <FilingStatus/>', () => {
+describe('Given the <FilingStatus/> connector', () => {
 
-    let stateConnectorEl,
-        testProps;
+    const chance = new Chance();
+    const sandbox = sinon.createSandbox();
+
+    let component,
+        mockProps;
 
     beforeEach(() => {
 
-        const store = mockReduxStore({
-            ...getDefaultState()
-        });
+        mockProps = {
+            dependents: chance.natural(),
+            filingStatus: chance.string(),
+            filingStatuses: [],
+            salary: chance.natural()
+        };
 
-        testProps = Object.freeze({
-            store
-        });
+        const mockStore = mockReduxStore(mockProps);
 
-        stateConnectorEl = shallow(<StateConnector {...testProps}/>);
+        sandbox.stub(actionCreators, 'updateSalary');
 
-    });
-
-    it('should be connecting <FilingStatus/>', () => {
-
-        expect(stateConnectorEl.type()).equal(FilingStatus);
+        component = shallow(<ReduxConnector store={mockStore}/>);
 
     });
 
-    Object.keys(actionCreators).forEach(actionCreator => {
+    afterEach(() => sandbox.restore());
 
-        it(`should have bounded \`${actionCreator}\` as an action`, () => {
+    it('should be connecting the right component', () => {
 
-            expect(stateConnectorEl.props().actions[actionCreator]).function();
+        expect(component.type()).equal(FilingStatus);
+        expect(component.props().dependents).equal(mockProps.dependents);
+        expect(component.props().filingStatus).equal(mockProps.filingStatus);
+        expect(component.props().filingStatuses).equal(mockProps.filingStatuses);
+        expect(component.props().salary).equal(mockProps.salary);
 
-        });
+    });
+
+    it('should update the salary when the filing status changes', () => {
+
+        const expectedNewFilingStatus = chance.string();
+
+        const expectedArgsToUpdateSalary = [
+            mockProps.salary,
+            expectedNewFilingStatus,
+            mockProps.dependents
+        ];
+
+        component.props().handleFilingStatusChange(mockEventValue(expectedNewFilingStatus));
+
+        sinon.assert.calledOnce(actionCreators.updateSalary);
+        sinon.assert.calledWithExactly(actionCreators.updateSalary, ...expectedArgsToUpdateSalary);
 
     });
 

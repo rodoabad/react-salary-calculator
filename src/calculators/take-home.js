@@ -11,10 +11,10 @@ export const getTakeHome = (grossIncome, federalTax, socialSecurity) => {
         .minus(socialSecurity);
 
     return {
-        biWeekly: yearly.dividedBy(BI_WEEKLY).round(2).toNumber(),
-        monthly: yearly.dividedBy(MONTHLY).round(2).toNumber(),
-        weekly: yearly.dividedBy(WEEKLY).round(2).toNumber(),
-        yearly: yearly.round(2).toNumber()
+        takeHomeBiWeekly: yearly.dividedBy(BI_WEEKLY).round(2).toNumber(),
+        takeHomeMonthly: yearly.dividedBy(MONTHLY).round(2).toNumber(),
+        takeHomeWeekly: yearly.dividedBy(WEEKLY).round(2).toNumber(),
+        takeHomeYearly: yearly.round(2).toNumber()
     };
 
 };

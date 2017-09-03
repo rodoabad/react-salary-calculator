@@ -4,11 +4,15 @@ import actions from './actions';
 const updateSalary = (state, action) =>
     SalaryCalculator.update(state, {
         $merge: {
+            dependents: action.dependents,
             federalTax: action.federalTax,
             filingStatus: action.filingStatus,
             salary: action.salary,
             socialSecurity: action.socialSecurity,
-            takeHome: action.takeHome,
+            takeHomeBiWeekly: action.takeHomeBiWeekly,
+            takeHomeMonthly: action.takeHomeMonthly,
+            takeHomeWeekly: action.takeHomeWeekly,
+            takeHomeYearly: action.takeHomeYearly,
             taxableIncome: action.taxableIncome
         }
     });

@@ -4,10 +4,10 @@ import Chance from 'chance';
 import actions from '../../src/actions';
 import sinon from 'sinon';
 
-const chance = new Chance();
-const sandbox = sinon.sandbox.create();
-
 describe('Given the action creators for the salary calculator', () => {
+
+    const chance = new Chance();
+    const sandbox = sinon.createSandbox();
 
     let dispatch;
 
@@ -17,15 +17,12 @@ describe('Given the action creators for the salary calculator', () => {
 
     });
 
-    afterEach(() => {
-
-        sandbox.restore();
-
-    });
+    afterEach(() => sandbox.restore());
 
     context('when updating the salary', () => {
 
-        let expectedFederalTax,
+        let expectedDependents,
+            expectedFederalTax,
             expectedFilingStatus,
             expectedSalary,
             expectedSocialSecurity,
@@ -34,33 +31,43 @@ describe('Given the action creators for the salary calculator', () => {
 
         beforeEach(() => { // eslint-disable-line max-statements
 
+            expectedDependents = chance.natural();
             expectedFederalTax = chance.natural();
             expectedFilingStatus = chance.string();
             expectedSalary = chance.natural();
             expectedSocialSecurity = chance.natural();
-            expectedTakeHome = chance.natural();
+            expectedTakeHome = {
+                takeHomeBiWeekly: chance.natural(),
+                takeHomeMonthly: chance.natural(),
+                takeHomeWeekly: chance.natural(),
+                takeHomeYearly: chance.natural()
+            };
             expectedTaxableIncome = chance.natural();
 
-            sandbox.stub(calculators, 'getTaxableIncome').withArgs(expectedSalary, expectedFilingStatus).returns(expectedTaxableIncome);
-            sandbox.stub(calculators, 'getFederalTax').withArgs(expectedTaxableIncome, expectedFilingStatus, 0).returns(expectedFederalTax);
-            sandbox.stub(calculators, 'getSocialSecurity').withArgs(expectedSalary, expectedFilingStatus).returns(expectedSocialSecurity);
-            sandbox.stub(calculators, 'getTakeHome').withArgs(expectedSalary, expectedFederalTax, expectedSocialSecurity).returns(expectedTakeHome);
+            sandbox.stub(calculators, 'getTaxableIncome').returns(expectedTaxableIncome);
+            sandbox.stub(calculators, 'getFederalTax').returns(expectedFederalTax);
+            sandbox.stub(calculators, 'getSocialSecurity').returns(expectedSocialSecurity);
+            sandbox.stub(calculators, 'getTakeHome').returns(expectedTakeHome);
 
         });
 
         it('should update the salary', () => {
 
             const expectedAction = {
+                dependents: expectedDependents,
                 federalTax: expectedFederalTax,
                 filingStatus: expectedFilingStatus,
                 salary: expectedSalary,
                 socialSecurity: expectedSocialSecurity,
-                takeHome: expectedTakeHome,
+                takeHomeBiWeekly: expectedTakeHome.takeHomeBiWeekly,
+                takeHomeMonthly: expectedTakeHome.takeHomeMonthly,
+                takeHomeWeekly: expectedTakeHome.takeHomeWeekly,
+                takeHomeYearly: expectedTakeHome.takeHomeYearly,
                 taxableIncome: expectedTaxableIncome,
                 type: actions.UPDATE_SALARY
             };
 
-            actionCreators.updateSalary(expectedSalary, expectedFilingStatus)(dispatch);
+            actionCreators.updateSalary(expectedSalary, expectedFilingStatus, expectedDependents)(dispatch);
 
             sinon.assert.calledOnce(dispatch);
             sinon.assert.calledWithExactly(dispatch, expectedAction);
