@@ -59,7 +59,7 @@
     "pkg:lint": "katulong rodoabad lint",
     "pkg:preview": "katulong rodoabad preview",
     "pkg:test/unit": "katulong rodoabad test",
-    "start": "yarn run pkg:build && node ./server.index.js",
+    "start": "yarn run pkg:build && node ./server/index.js",
     "test": "npm run pkg:lint && npm run pkg:test/unit"
   }
 }
