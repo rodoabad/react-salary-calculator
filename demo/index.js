@@ -6,6 +6,6 @@ import SalaryCalculator from '../src';
 const store = storeFactory.getStore();
 
 ReactDom.render(
-    <SalaryCalculator store={store} isEnabled={true}/>,
+    <SalaryCalculator store={store}/>,
     document.getElementById('content')
 );

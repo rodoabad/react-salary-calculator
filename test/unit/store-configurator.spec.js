@@ -1,5 +1,4 @@
 import * as redux from 'redux';
-import * as reduxLogger from 'redux-logger';
 import * as reduxThunk from 'redux-thunk';
 import * as storeConfigurator from '../../src/store-configurator';
 import {expect} from 'code';
@@ -30,7 +29,6 @@ describe('Given the store configurator', () => {
         expectedReducers = {};
 
         sandbox.stub(reduxThunk, 'default');
-        sandbox.stub(reduxLogger, 'default');
 
         stubApplyMiddleWare();
 
