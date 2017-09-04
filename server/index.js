@@ -1,11 +1,43 @@
 const path = require('path');
-const express = require('express');
+const Hapi = require('hapi');
+const Inert = require('inert');
 
-const app = express();
+const server = new Hapi.Server({
+    connections: {
+        routes: {
+            files: {
+                relativeTo: path.join(__dirname, '..', 'dist')
+            }
+        }
+    }
+});
 
-app.use(express.static(path.join(__dirname, '../dist')));
-app.set('port', process.env.PORT || 8080);
+server.connection({
+    port: process.env.PORT || 8080
+});
 
-const server = app.listen(app.get('port'), () => {
-    console.log('listening on port ', server.address().port);
+server.register(Inert);
+
+server.route({
+    handler: {
+        directory: {
+            index: true,
+            path: '.',
+            redirectToSlash: true
+        }
+    },
+    method: 'GET',
+    path: '/{param*}'
+});
+
+server.start((err) => {
+
+    if (err) {
+
+        throw err;
+
+    }
+
+    console.log('Server running at:', server.info.uri);
+
 });
