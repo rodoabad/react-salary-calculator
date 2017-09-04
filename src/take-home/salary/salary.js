@@ -6,8 +6,10 @@ const Salary = props =>
     <section className='salary'>
         <FormattedMessage id='SALARY'/>
         <input
+            inputMode='numeric'
             min='0'
             onChange={props.handleSalaryChange}
+            pattern='[0-9]*'
             type='number'
             value={props.salary}
         />

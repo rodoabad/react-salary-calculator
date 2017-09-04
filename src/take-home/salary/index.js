@@ -12,7 +12,7 @@ const mergeProps = (stateProps, dispatchProps) => ({
     ...stateProps,
     handleSalaryChange: event => {
 
-        const newSalary = parseInt(event.target.value, 10) || 0;
+        const newSalary = parseFloat(event.target.value) || 0;
 
         dispatchProps.updateSalary(newSalary, stateProps.filingStatus, stateProps.dependents);
 

@@ -49,6 +49,8 @@ describe('Given the <Salary/> component', () => {
 
         const expectedNewSalary = chance.natural();
 
+        expect(inputBox.props().inputMode).equal('numeric');
+        expect(inputBox.props().pattern).equal('[0-9]*');
         expect(inputBox.props().type).equal('number');
         expect(inputBox.props().min).equal('0');
         expect(inputBox.props().value).equal(mockProps.salary);
