@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "bignumber.js": "^2.4.0",
+    "express": "^4.15.4",
     "moment": "^2.15.2",
     "prop-types": "^15.5.10",
     "react": "^15.3.2",
@@ -43,7 +44,7 @@
     "eslint-config-rodoabad": "^1.13.1",
     "ghooks": "^1.3.2",
     "katulong": "^4.1.4",
-    "katulong-preset-rodoabad": "^1.6.0",
+    "katulong-preset-rodoabad": "^1.7.0",
     "mocha-clean": "^1.0.0",
     "react-addons-perf": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
@@ -58,6 +59,7 @@
     "pkg:lint": "katulong rodoabad lint",
     "pkg:preview": "katulong rodoabad preview",
     "pkg:test/unit": "katulong rodoabad test",
+    "start": "yarn run pkg:build && node ./server.index.js",
     "test": "npm run pkg:lint && npm run pkg:test/unit"
   }
 }
