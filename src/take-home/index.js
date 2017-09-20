@@ -9,9 +9,10 @@ import TakeHomeMonthly from './take-home-monthly';
 import TakeHomeWeekly from './take-home-weekly';
 import TakeHomeYearly from './take-home-yearly';
 import TaxableIncome from './taxable-income';
+import styles from '../styles/take-home.css';
 
 const TakeHome = () =>
-    <section className='take-home'>
+    <section className={styles.takeHome}>
         <Salary/>
         <FilingStatus/>
         <Dependents/>

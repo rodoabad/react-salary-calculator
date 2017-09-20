@@ -1,2 +1,3 @@
 --recursive
+--require ./test/utils/css-hooks.js
 --require mocha-clean
