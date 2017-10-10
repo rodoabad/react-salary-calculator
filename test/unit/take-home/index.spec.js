@@ -12,7 +12,7 @@ import TakeHomeYearly from '../../../src/take-home/take-home-yearly';
 import TaxableIncome from '../../../src/take-home/taxable-income';
 import {expect} from 'code';
 import {shallow} from 'enzyme';
-import {takeHome} from '../../../src/styles/take-home.css';
+import {takeHome} from '../../../src/take-home/take-home.scss';
 
 describe('Given the <TakeHome/> component', () => {
 
@@ -24,9 +24,9 @@ describe('Given the <TakeHome/> component', () => {
 
     });
 
-    it('should be a section', () => {
+    it('should be a main', () => {
 
-        expect(component.type()).equal('section');
+        expect(component.type()).equal('main');
         expect(component.props().className).equal(takeHome);
 
     });
