@@ -62,6 +62,6 @@
     "pkg:preview": "katulong rodoabad preview",
     "pkg:test/unit": "katulong rodoabad test",
     "start": "yarn run pkg:build && node ./server/index.js",
-    "test": "yarn run pkg:lint && yarn run pkg:coverage"
+    "test": "yarn check --integrity && yarn run pkg:lint && yarn run pkg:coverage"
   }
 }

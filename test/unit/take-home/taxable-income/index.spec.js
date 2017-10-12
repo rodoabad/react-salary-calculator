@@ -6,29 +6,33 @@ import {expect} from 'code';
 import {mockReduxStore} from '../../../utils';
 import {shallow} from 'enzyme';
 
-describe('Given the <TaxableIncome/> connector', () => {
+describe('<TaxableIncome/> connector', () => {
 
     const chance = new Chance();
 
-    let component,
-        mockProps;
-
-    beforeEach(() => {
-
-        mockProps = {
-            taxableIncome: chance.natural()
-        };
-
-        const mockStore = mockReduxStore(mockProps);
-
-        component = shallow(<ReduxConnector store={mockStore}/>);
-
+    const requiredProps = () => ({
+        taxableIncome: chance.natural()
     });
+
+    const render = (props = requiredProps()) => {
+
+        const mockStore = mockReduxStore(props);
+
+        return shallow(<ReduxConnector store={mockStore}/>);
+
+    };
 
     it('should be connecting the right component', () => {
 
+        const props = {
+            ...requiredProps(),
+            taxableIncome: chance.natural()
+        };
+
+        const component = render(props);
+
         expect(component.type()).equal(TaxableIncome);
-        expect(component.props().taxableIncome).equal(mockProps.taxableIncome);
+        expect(component.props().taxableIncome).equal(props.taxableIncome);
 
     });
 
